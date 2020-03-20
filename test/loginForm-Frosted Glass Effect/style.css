@@ -14,7 +14,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url('https://images.unsplash.com/photo-1482659853714-4bf4b5f2e7bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1190&q=80');
+    background-image: url('https://images.unsplash.com/photo-1464646163800-8331cc18a357?ixlib=rb-1.2.1&auto=format&fit=crop&w=1046&q=80');
     width: 100%;
     height: 100%;
     font-family: Arial, Helvetica, sans-serif;
@@ -107,7 +107,7 @@ button {
     padding: 2px 10px;
     color: #000;
     margin: 5px 0;
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: pointer;
 }
 
