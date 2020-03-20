@@ -162,7 +162,7 @@ header nav li a:hover:after  {
 
 header nav .user-display {
     display: flex;
-    margin: 0 5px;
+    margin: 3px 1px;
     padding: 0;
 }
 
@@ -173,6 +173,11 @@ header nav .user-display .avatar {
     left: calc(50% - 50px);
     padding: 0;
     margin: 0 3px;
+}
+
+header nav .user-display p {
+    font-style: 'Quicksand', sans-serif;
+    font-size: 15px
 }
 
 @media only screen and (max-width: 1000px) {
