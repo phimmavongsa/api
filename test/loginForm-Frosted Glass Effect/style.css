@@ -102,3 +102,15 @@ input.user-username, input.user-password {
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
 }
+
+button {
+    padding: 2px 10px;
+    color: #000;
+    margin: 5px 0;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
