@@ -18,11 +18,19 @@
                 <input type="text" class="user-username" placeholder="Username" autofocus>
                 <input type="text" class="user-password" placeholder="Password">
                 <button>Login</button>
-            </form>  
+            </form>
+            <div class="user-login3party">
+                <p>or login with</p>
+                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                </fb:login-button>
+
+                <div id="status"></div>
+                <button onClick="logout()" >Logout</button>
+            </div>  
         </div>
     </div>
-    
 
-   <!-- <script src="auth-fac.js"></script> -->
+    
+<script src="auth-fac.js"></script>
 </body>
 </html>

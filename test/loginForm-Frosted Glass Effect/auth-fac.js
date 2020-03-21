@@ -66,7 +66,8 @@ window.fbAsyncInit = function() {
 function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-        console.log('Successful login for: ' + response.name);
+        console.log('Respone: ' , response);
+        // console.log('Successful login for: ' + response.name);
         document.getElementById('status').innerHTML =
             'Thanks for logging in, ' + response.name + '!';
     });
@@ -81,10 +82,15 @@ function getMe() {
  
  function logout() {
     FB.logout(function(response) {
-       // console.log('Logout')
-       // document.getElementById('status').innerHTML =
-       //     'Thanks for logging out!';
-       document.location.reload();
+       console.log('Logout')
+       document.getElementById('status').innerHTML =
+           'Thanks for logging out!';
+    //    document.location.reload();
     });
  }
+ 
+
+
+ //-----------------------------------
+
  
