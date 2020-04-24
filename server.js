@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
+// const assert = require('assert');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -10,7 +10,7 @@ const env = require('dotenv').config();
 const app = express();
 
 
-const uri = "mongodb+srv://fzea01:activeme@cluster0-bolzh.azure.mongodb.net/test?retryWrites=true&w=majority";
+const uri = process.env.URL_MONGODB;
 const client = new MongoClient(uri, { useNewUrlParser: true,useUnifiedTopology: true });
 const dbName = 'dcw';
 let information = {};
@@ -28,7 +28,7 @@ app.use( session({
 (async () => {
     try {
       await client.connect();
-      console.log("Connected correctly to server");
+      console.log("Connected correctly to database server");
       const db = client.db(dbName);
       const col0 = db.collection('users');
       const col1 = db.collection('session');
@@ -40,7 +40,7 @@ app.use( session({
       information.coverpage = await col2.find({}).toArray();   //Cover Pages
       information.post = await col3.find({}).toArray();   //All Post
 
-      console.log('Query data dont!');
+      console.log('Query data from database success!!!');
   
       // Close connection
       client.close();
@@ -99,5 +99,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(process.env.PORT , () => {
-    console.log('Starting server on port ' + process.env.PORT)
+    console.log(`Starting api server at http://localhost:${process.env.PORT}`)
 });
