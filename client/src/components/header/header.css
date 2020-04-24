@@ -1,0 +1,115 @@
+ul, nav {
+    list-style: none;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    padding: 35px 100px 0;
+}
+
+header h2 {
+    font-style: 'Quicksand', sans-serif;
+}
+
+
+header nav {
+    
+    display: flex;
+    align-items: flex-start;
+}
+
+header nav li {
+    margin: 0 15px;
+}
+
+header nav li:first-child {
+    margin-left: 0;
+}
+
+header nav li:last-child {
+    margin-left: 0;
+}
+
+header nav li a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 4px 0;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+}
+
+header nav li a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    top: 100%;
+    left: 0;
+    background: #3498db;
+    transition: transform 0.5s;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+header nav li a:hover  {
+    color: #AAAAAA;
+}
+
+header nav li a:hover:after  {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+header nav .user-display {
+    display: flex;
+    margin: 3px 1px;
+    padding: 0;
+}
+
+header nav .user-display .avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    left: calc(50% - 50px);
+    padding: 0;
+    margin: 0 3px;
+}
+
+header nav .user-display p {
+    font-style: 'Quicksand', sans-serif;
+    font-size: 15px
+}
+
+@media only screen and (max-width: 1000px) {
+    header {
+        padding: 20px 50px;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+    header {
+        flex-direction: column;
+    }
+
+    header h2 {
+        margin-bottom: 15px;
+    }
+
+    header nav .user-display{
+        display: none;
+    }
+}

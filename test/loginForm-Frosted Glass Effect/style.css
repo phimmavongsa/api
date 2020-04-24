@@ -103,7 +103,8 @@ input.user-username, input.user-password {
     -o-border-radius: 2px;
 }
 
-button {
+/* button { */
+.btn {
     text-align: center;
     padding: 5px 40px;
     color: #fff;
@@ -120,7 +121,8 @@ button {
 
 }
 
-button:hover {
+/* button:hover { */
+.btn:hover {
     opacity: 1;
     background-color: #33CC99;
     color: #fff;

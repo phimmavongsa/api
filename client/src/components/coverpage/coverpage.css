@@ -1,0 +1,109 @@
+
+/* .background-image {
+    background-image: url('../images/tom-unsplash.jpg');
+} */
+
+.hero {
+    position: relative;
+    justify-content: center;
+    min-height: 100vh;
+    color: #fff;
+    text-align: center;
+}
+
+.hero .background-image {
+    background-image: url('./assets/img/tom-unsplash.jpg');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-color: #2196f3;
+    z-index: -1;
+}
+
+.hero .background-image:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #414a4f;
+    opacity: 0.5;
+}
+
+
+.hero h1 {
+    font: bold 60px 'Open Sans', sans-serif;
+    margin-bottom: 15px;
+}
+.hero h3 {
+    font: bold 28px 'Open Sans', sans-serif;
+    margin-bottom: 40px;
+}
+
+.hero p {
+    font:  2em 'Open Sans', sans-serif;
+    margin-bottom: 15px;
+
+    justify-content: center;
+    width: 100%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hero p .typing {
+    position: relative;
+    line-height: 24px;
+    display: inline-block;
+    color: #fff;
+    min-width: 1px;
+    min-height: 24px;
+}
+
+.hero p .typing:after {
+    content: "";
+    position: absolute;
+    top: -10%;
+    right: -5px;
+    width: 1px;
+    height: 150%;
+    border-right: 2px solid #fff;
+    animation: blink .5s infinite ease;
+    -webkit-animation: blink .5s infinite ease;
+}
+
+.hero p span {
+    margin-bottom: 0;
+}
+
+.hero a.btn {
+    padding: 20px 45px;
+}
+
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .hero {
+        min-height: 600px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+    .hero h3 {
+        font-size: 24px;
+    }
+    .hero a.btn {
+        padding: 15px 40px;
+    }
+}
