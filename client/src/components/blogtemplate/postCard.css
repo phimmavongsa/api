@@ -1,0 +1,63 @@
+.sec-items {
+    color: #000;
+    font-size: 12px;
+    background-color: rgb(240, 240, 240);
+    margin-bottom: 10px;
+}
+.sec-items img {
+    width: 200px;
+    height: 200px;
+    margin-top: 10px;
+}
+
+.sec-items p {
+    color: #000;
+    text-align: justify;
+    position: relative;
+    font-size: 13px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 5em;
+    line-height: 1.3em;
+    margin-bottom: 0;
+}
+
+.sec-img {
+    position: relative;
+}
+
+.sec-img img{
+    opacity: .9;
+}
+
+.sec-img h2 {
+    z-index: 1;
+    position: absolute;
+    top:10%;
+    left:50%;
+    font-size: 12px;
+    background-color: beige;
+    padding: 1px 5px;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
+
+
+.sec-bnt {
+    padding: 8px;
+    font-size: 10px;
+}
+
+.sec-bnt button {
+    margin-left: 5px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+
+

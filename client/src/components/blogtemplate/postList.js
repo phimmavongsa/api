@@ -1,31 +1,36 @@
-import React, { useEffect } from 'react'
-import PostCard from './postCard';
-import './postList.css';
+import React, { useEffect} from 'react'
+import PostCard from './PostCard';
+import './PostList.css';
 import { useSelector,useDispatch } from 'react-redux'
 import axios from 'axios'
-const  port = 8080
+const  port = 8000
 
-const postList = props => {
-
+const PostList = props => {
     const posts = useSelector(state => state.post);
-    // const dispatch = useDispatch(); 
+    const dispatch = useDispatch(); 
 
-    // const getStudents = async () => {
-    //     const result = await axios.get(`http://localhost:${port}/api/students`)
-    //     dispatch({ type: 'GET_STUDENTS', students: result.data })
+    // const getPosts = async () => {
+    //     const result = await axios.get(`http://localhost:${port}/api/posts`)
+    //     console.log('data', result.data);
+    //     dispatch({ type: 'GET_POSTS', posts: result.data })
     // }
 
-    // useEffect(() => {
-    //     const getPosts = async () => {
-    //         const result = await axios.get(`http://localhost:${port}/api/students`)     
-    //         dispatch({ type: 'GET_POSTS', posts: result.data }) 
-    //     }
-    //     getPosts()
-    //     // eslint-disable-next-line
-    //   }, [props])
+    useEffect(() => {
+        const getPosts = async () => {
+            const result = await axios.get(`http://localhost:${port}/api/posts`) 
+            if(result.data.message){
+                console.log('No data, Wait server query data');
+            }else{
+                // console.log('data',result.data);
+                dispatch({ type: 'GET_POSTS', posts: result.data }) 
+            }
+        }
+        getPosts()
+        // eslint-disable-next-line
+      }, [props])
 
     if (!posts || !posts.length)
-        return (<h2>No Posts</h2>)
+        return (<h2>Oop!,  Wait a minute for server query data</h2>)
 
     return (
         
@@ -43,4 +48,4 @@ const postList = props => {
     )
 }
 
-export default postList;
+export default PostList;

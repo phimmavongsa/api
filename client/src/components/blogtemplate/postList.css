@@ -1,0 +1,18 @@
+.cd-container {
+    max-width: 960px;
+    margin: 0 auto;
+    /* margin-top: 2rem; */
+    color: #fff;
+    text-align: center;
+
+}
+
+.section-grid {
+    padding-top: .5rem;
+    border-top: 1px solid rgb(55, 55, 55);
+    border-bottom: 1px solid rgb(55, 55, 55);
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 1rem;
+    margin-bottom: 10px;
+}

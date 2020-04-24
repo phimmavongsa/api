@@ -4,11 +4,11 @@ import './coverpage.css';
 const coverpage = (props) => {
     return (
         <section className="hero" id="hero">
-            <div class="background-image" ></div>
+            <div className="background-image" ></div>
             <h1>Responsive Flexbox Template</h1>
-            <p>Hello I am <span id="typing" class="typing"></span></p>
+            <p>Hello I am <span id="typing" className="typing"></span></p>
             <h3>A freebie by Tutorialzine</h3>
-            <a href="#hero" classname="btn">Click Here</a>  
+            <a href="#hero" className="btn">Click Here</a>  
         </section>
     )
 }

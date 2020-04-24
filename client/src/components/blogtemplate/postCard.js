@@ -1,13 +1,12 @@
 import React from 'react';
-import './postCard.css';
+import './PostCard.css';
 import { useSelector,useDispatch } from 'react-redux'
 import axios from 'axios'
 
-const port = 8080
-const postCard = props => {
-
-    const dispatch = useDispatch();
+const port = 8000
+const PostCard = props => {
     const form = useSelector( state => state.form )
+    const dispatch = useDispatch();
 
     const deleteStudent = async () => {
         await axios.delete(`http://localhost:${port}/api/students/${props.id}`)
@@ -25,10 +24,10 @@ const postCard = props => {
     return (
         <div className='sec-items'>
             <div className='sec-img'>
-                <h2>{props.fac}</h2>
+                <h2>{props.topic}</h2>
                 <img src={`${props.img}`} alt='img' />
             </div>
-            <p>{props.name} {props.surname}</p>
+            <p>{props.txt}</p>
             <div className='sec-bnt'>
                 <button onClick={updateStudent}>Update</button>
                 <button onClick={deleteStudent}>Delete</button>
@@ -37,4 +36,4 @@ const postCard = props => {
     )
 }
 
-export default postCard;
+export default PostCard;

@@ -87,8 +87,8 @@ const postReducer = (posts = [], action) => {
             return action.posts;   //action.payload
         case 'ADD_POST' :
             return [...posts, action.post];
-        case 'DEL_POST' :
-            return posts.filter(post => +post.id !== +action.id);
+        // case 'DEL_POST' :
+        //     return posts.filter(post => +post.id !== +action.id);
         // case 'UPDATE_STUDENT' :
         //     return posts.map(post => {
         //         if(+post.id === +action.id)

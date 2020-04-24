@@ -11,17 +11,19 @@ const app = express();
 
 
 const uri = process.env.URL_MONGODB;
+const dbName = process.env.DATABASENAME_MONGDB;
 const client = new MongoClient(uri, { useNewUrlParser: true,useUnifiedTopology: true });
-const dbName = 'dcw';
 let information = {};
 
 app.use( cors() );
 app.use('/api', bodyParser.urlencoded({ extended: true }), router);
 app.use('/api', bodyParser.json(), router);
 app.use( session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
+    secret: process.env.SESSION_SECRET,
+    key: process.env.SESSION_KEY,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 600000 }
 }));
 
 
@@ -40,10 +42,10 @@ app.use( session({
       information.coverpage = await col2.find({}).toArray();   //Cover Pages
       information.post = await col3.find({}).toArray();   //All Post
 
-      console.log('Query data from database success!!!');
+      console.log('Query All Data from database success!!!');
   
       // Close connection
-      client.close();
+    //   client.close();
     } catch(err) {
       console.log(err.stack);
     }
@@ -87,6 +89,19 @@ router.route('/cover_pages')
 
 router.route('/posts')
     .get((req,res) => {
+        (async () => {
+            try {
+            //   await client.connect();
+              const db = client.db(dbName);
+              const col = db.collection('post');
+              information.post = await col.find({}).toArray();   //All Post
+              console.log('Query New! Post from database success!!!');
+              // Close connection
+            //   client.close();
+            } catch(err) {
+              console.log(err.stack);
+            }
+          })();
         information.post && information.post.length != 0 ? res.json(information.post):res.json({message:'Data Not Found'});
         res.end();
     });

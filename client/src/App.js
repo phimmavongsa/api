@@ -3,8 +3,8 @@ import './App.css';
 
 import Navbar from './components/header/header';
 import Coverpage from './components/coverpage/coverpage';
-import PostLayout from './components/blogtemplate/postLayout'
-import CoronaPage from './components/corona/corona';
+import PostLayout from './components/blogtemplate/PostLayout'
+// import CoronaPage from './components/corona/corona';
 
 const App = () => {
   return (
