@@ -3,6 +3,7 @@ const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 // const assert = require('assert');
 const session = require('express-session');
+// const { matchedData } = require("express-validator")
 const bodyParser = require('body-parser');
 const path = require('path');
 const router = express.Router();
@@ -14,9 +15,15 @@ const uri = process.env.URL_MONGODB;
 const dbName = process.env.DATABASENAME_MONGDB;
 const client = new MongoClient(uri, { useNewUrlParser: true,useUnifiedTopology: true });
 let information = {};
+let callbackData = { authenticated:false };
 
-app.use( cors() );
-app.use('/api', bodyParser.urlencoded({ extended: true }), router);
+app.use( cors({ 
+    origin: ['http://localhost:3000'], 
+    methods: ['GET', 'POST','PUT','DELETE'], 
+    credentials: true 
+}));
+// app.use(cors());
+app.use('/api', bodyParser.urlencoded({ extended: false }), router);
 app.use('/api', bodyParser.json(), router);
 app.use( session({
     secret: process.env.SESSION_SECRET,
@@ -53,21 +60,49 @@ app.use( session({
 
 router.route('/auth')
     .get((req,res) => {
-        res.json({message:'auth'});
+         (async () => {
+            try {
+              const db = client.db(dbName);
+              const col = db.collection('users');
+              information.users= await col.find({}).toArray();   //All Post
+              console.log('Query New! Users from database success!!!');
+            } catch(err) {
+              console.log(err.stack);
+            }
+          })();
+              
+        res.json(callbackData)
     })
+
     .post((req,res) => {
-    console.log('post auth');
-    let username = req.body.username;
-    let password = req.body.password;
-    console.log(username +'-'+password);
-    // if(username && password){
-    //     req.session.loggedin = true;
-    //     req.session.username = username;
-    // } else {
-    //     req.session.loggedin = false;
-    // }
-    // res.json({message:'Login Success'});
+    let user = {};
+    user.username = req.query.username;
+    user.password = req.query.password;
+    console.log('Checked User :', user.username);
+    let LoopCheck = true;
+    for(let i in information.users){
+        if(LoopCheck) {
+            if( user.username == information.users[i].username && 
+                user.password == information.users[i].password ){ 
+                callbackData.userid = information.users[i].userid;
+                callbackData.username = information.users[i].username;
+                callbackData.permission = information.users[i].permission;
+                callbackData.authenticated = true;
+                LoopCheck = false;
+                console.log(' User :', user.username, 'Authen Pass!!!');
+            }else{
+                callbackData.userid = null;
+                callbackData.username = null;
+                callbackData.permission = null;
+                callbackData.authenticated = false;
+            }
+        }    
+    }
+    console.log(callbackData)
+    res.json(callbackData);
+
 })
+
 router.route('/users')
     .get((req,res) => {
         information.users && information.users.length != 0 ? res.json(information.users):res.json({message:'Data Not Found'});

@@ -1,9 +1,9 @@
 import React from 'react';
-import './PostLayout.css';
+import './PostLayOut.css';
 
 import PostList from './PostList'
 
-const PostLayout = () => {
+const PostLayOut = () => {
   return (
     <section>
         <PostList />
@@ -11,4 +11,4 @@ const PostLayout = () => {
   );
 }
 
-export default PostLayout;
+export default PostLayOut;

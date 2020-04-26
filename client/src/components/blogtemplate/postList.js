@@ -7,6 +7,7 @@ const  port = 8000
 
 const PostList = props => {
     const posts = useSelector(state => state.post);
+    // const session = useSelector(state => state.session);
     const dispatch = useDispatch(); 
 
     // const getPosts = async () => {
@@ -14,6 +15,7 @@ const PostList = props => {
     //     console.log('data', result.data);
     //     dispatch({ type: 'GET_POSTS', posts: result.data })
     // }
+    // console.log('session',session);
 
     useEffect(() => {
         const getPosts = async () => {

@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { sessionReducer } from 'redux-react-session';
+import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger'
 
 // const initialForm = {
@@ -51,14 +52,55 @@ const formReducer = (data = initialForm, action) => {
     }
 }
 
-const userReducer = (userdatas = [], action) => {
+const initialUser = {
+    username:'',
+    password:'',
+
+}
+
+const userReducer = (userdata = initialUser, action) => {
     switch(action.type) {
-        case 'GET_USERDATA' :
-            return action.userdatas
-        case 'ADD_USERDATA' :
-            return [...userdatas, action.userdata]
+        case 'CHENG_USERNAME' : 
+            return {...userdata, username: action.username}
+        case 'CHENG_PASSWORD' : 
+            return {...userdata, password: action.password}
         default :
-            return userdatas
+            return userdata
+    }
+}
+
+const initialSession2 = {
+    user:{ 
+            userid : null,
+            username : null,
+            permission :null
+        },
+    authenticated : false,
+    loginstate : false
+}
+
+const sessionReducer2 = (session = initialSession2, action) => {
+    switch(action.type) {
+        case 'LOGIN' : 
+            return {...session, user: { 
+                                        userid : action.userid,
+                                        username : action.username,
+                                        permission : action.permission
+                                    },
+                                authenticated : true,
+                                loginstate : true
+                    }
+        case 'LOGOUT' : 
+            return {...session, user: { 
+                                        userid : null,
+                                        username : null,
+                                        permission : null
+                                    },
+                                authenticated : true,
+                                loginstate : true
+                    }
+        default :
+            return session
     }
 }
 
@@ -105,7 +147,8 @@ const reducers = combineReducers({
     user: userReducer,
     post: postReducer,
     form: formReducer,
-    session: sessionReducer
+    session: sessionReducer,
+    session2: sessionReducer2
 })
 
-export const store = createStore(reducers, applyMiddleware(logger));
+export const store = createStore(reducers, applyMiddleware(logger,thunkMiddleware));
