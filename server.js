@@ -5,11 +5,13 @@ const MongoClient = require('mongodb').MongoClient;
 const session = require('express-session');
 // const { matchedData } = require("express-validator")
 const bodyParser = require('body-parser');
-const path = require('path');
+const soap = require('soap');
+// const path = require('path');
 const router = express.Router();
 const env = require('dotenv').config();
 const app = express();
 
+const urlPSUAuth = process.env.URL_PSU_AUTH;
 
 const uri = process.env.URL_MONGODB;
 const dbName = process.env.DATABASENAME_MONGDB;
@@ -23,7 +25,7 @@ app.use( cors({
     credentials: true 
 }));
 // app.use(cors());
-app.use('/api', bodyParser.urlencoded({ extended: false }), router);
+app.use('/api', bodyParser.urlencoded({ extended: true }), router);
 app.use('/api', bodyParser.json(), router);
 app.use( session({
     secret: process.env.SESSION_SECRET,
@@ -98,10 +100,41 @@ router.route('/auth')
             }
         }    
     }
-    console.log(callbackData)
+    console.log(callbackData);
     res.json(callbackData);
-
+    res.end();
 })
+
+router.route('/psu_auth')
+    .post((req, res) => {
+        console.log('PSU : ',req.query);
+        soap.createClient(urlPSUAuth, (err, client) => {
+            if (err) console.error(err);
+            else {
+                let user = {}
+                user.username = req.query.username
+                user.password = req.query.password
+
+                // client.GetStaffDetails(user, function (err, response) {
+                    client.GetStudentDetails(user, (err, response) => {
+                    if (err) console.error(err);
+
+                    console.log('resualt',response.GetStudentDetailsResult);
+
+                    if(response.GetStudentDetailsResult.string[0] != '') {
+                        console.log('1');
+                        res.json({authenticated:true});
+                    }else{
+                        console.log('0');
+                        res.json({authenticated:false});
+                    }
+                });
+            }
+        });
+
+        // res.end();
+    })
+
 
 router.route('/users')
     .get((req,res) => {
@@ -109,47 +142,80 @@ router.route('/users')
         res.end();
     })
     .post((req,res) => {
-        console.log('SigUp :',req.query);
         let user = {};
-        user.id = Math.floor(Math.random() * 100000);
+        user.userid = Math.floor(Math.floor(Math.random() * 100000)).toString();
         user.email = req.query.email;
         user.username = req.query.username;
         user.password = req.query.password;
         user.permission = 'user';
-        res.json({message:'ok'});
-    })
 
-router.route('/session')
-    .get((req,res) => {
-        session.loggedin == true ? res.json({username:'Nat', message:'true'}):res.json({username:'null', message:'false'});
-        // information[1] && information[1].length != 0  ? res.json(information[1]):res.json({message:'Data Not Found'});
+        (async () => {
+            try {
+              const db = client.db(dbName);
+              const col = db.collection('users');
+              await col.insertOne(user);
+              console.log('Insert user', user.username, ' to database success!!!');
+            } catch(err) {
+              console.log(err.stack);
+            }
+          })();
+
+        res.json({message:'ok'});
         res.end();
     })
+
+// router.route('/session')
+//     .get((req,res) => {
+//         session.loggedin == true ? res.json({username:'Nat', message:'true'}):res.json({username:'null', message:'false'});
+//         // information[1] && information[1].length != 0  ? res.json(information[1]):res.json({message:'Data Not Found'});
+//         res.end();
+//     })
 
 router.route('/cover_pages')
     .get((req,res) => {
         information.coverpage && information.coverpage.length != 0 ? res.json(information.coverpage):res.json({message:'NotFound'});
         res.end();
-    });
+    })
 
 router.route('/posts')
     .get((req,res) => {
         (async () => {
             try {
-            //   await client.connect();
               const db = client.db(dbName);
               const col = db.collection('post');
               information.post = await col.find({}).toArray();   //All Post
               console.log('Query New! Post from database success!!!');
-              // Close connection
-            //   client.close();
+
             } catch(err) {
               console.log(err.stack);
             }
           })();
+
         information.post && information.post.length != 0 ? res.json(information.post):res.json({message:'Data Not Found'});
         res.end();
-    });
+    })
+
+    .post((req,res) => {
+        let post = {};
+        post.userid = req.query.userid;
+        post.topic = req.query.topic;
+        post.txt = req.query.txt;
+        post.img = req.query.img;
+
+        (async () => {
+            try {
+              const db = client.db(dbName);
+              const col = db.collection('post');
+              await col.insertOne(post);
+              console.log('Insert post user ID ', post.userid, ' to database success!!!');
+            } catch(err) {
+              console.log(err.stack);
+            }
+          })();
+
+        res.json({message:'ok'});
+        res.end();
+    })
 
 app.use("*", (req, res) => res.status(404).send('404 Not found'));
 

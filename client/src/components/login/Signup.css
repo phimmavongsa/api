@@ -16,8 +16,8 @@
 .blurred-box-signup {
     position: relative;
     width: 250px;
-    height: 450px;
-    top: calc(50% - 175px);
+    height: 490px;
+    top: calc(40% - 175px);
     left: calc(50% - 125px);
     background: inherit;
     border-radius: 2px;
@@ -31,7 +31,7 @@
 .blurred-box-signup:after {
     content: "";
     width: 400px;
-    height: 400px;
+    height: 500px;
     background: inherit;
     position: absolute;
     left: -20px;
@@ -94,6 +94,11 @@ input.user-username, input.user-password {
     -o-border-radius: 2px;
 }
 
+.user-login-box-signup label {
+    text-align: left;
+    margin: 5px 0;
+    color: #fff;
+}
 
 .btn-signup {
     text-align: center;

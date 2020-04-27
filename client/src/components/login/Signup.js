@@ -1,20 +1,12 @@
 import React,{ useState } from 'react';
-// import * as sessionActions from '../actions/sessionActions';
-// import { useSelector, useDispatch } from 'react-redux'
-// import { bindActionCreators } from 'redux';
 import { withRouter,useHistory } from 'react-router-dom';
-
-// import PropTypes from 'prop-types';
 import axios from 'axios'
 import './Signup.css';
 
 
 const port = 8000;
 
-const Signup = (props) => {
-    // const user = useSelector( state => state.user );
-    // const usersession = useSelector( state => state.usersession );
-    // const dispatch = useDispatch();
+const Signup = () => {
     const [Email, setEmail] = useState('');
     const [Username, setUsername] = useState('');
     const [Password, setPassword] = useState('');
@@ -22,18 +14,20 @@ const Signup = (props) => {
     let history = useHistory();
 
     const SignupState = async () => {
-        if(Password === rePassword){
-            let result = await axios.post(`http://localhost:${port}/api/users?email=${Email}&&username=${Username}&&password=${Password}`);
-            history.push('/login');
-        } else {
-            console.log('Password not match');
-            alert('โปรดใส่รหัสผ่านให้ถูกต้อง');
-            window.location.reload(true);
+        if( Email && Username && Password && rePassword ){
+            if(Password === rePassword){
+                await axios.post(`http://localhost:${port}/api/users?email=${Email}&&username=${Username}&&password=${Password}`);
+                alert('สมัครเสร็จเรียบร้อย  สามารถเข้าสู่ระบบได้แล้ว');
+                history.push('/login');
+            } else {
+                console.log('Password not match');
+                alert('โปรดใส่รหัสผ่านให้ถูกต้อง');
+                window.location.reload(true);
+            }          
+        }else{
+           alert('โปรดกรอกให้ครบทุกช่อง');
         }
-    
-        // await axios.get(`http://localhost:${port}/api/auth`);
         
- 
     }
 
  
@@ -55,38 +49,31 @@ const Signup = (props) => {
                 <div className="user-login-box-signup">
                     <span className="user-icon-signup"></span>
                     <div className="user-title-signup">สมัครสมาชิก</div>
-                    {/* <form   > */}
-                    <label htmlFor='email'>Email</label>
-                        <input  id='email' type="email" onChange={(e)=> setEmail(e.target.value)} 
-                                autoComplete="on" className="user-username" 
-                                name='email' placeholder="กรุณากรอก" 
-                                autoFocus required />
-                        <label htmlFor='username'>UserName</label>
-                        <input  id='username' type="text" onChange={(e)=> setUsername(e.target.value)} 
-                                autoComplete="on" className="user-username" 
-                                name='username' placeholder="กรุณากรอก" 
-                                autoFocus required />
-                        <label htmlFor='password'>Password</label>
-                        <input  id='password' type="password" onChange={(e)=> setPassword(e.target.value)} 
-                                autoComplete="on" className="user-password" 
-                                name='password' placeholder="กรุณากรอก" 
-                                required />
-                        <label htmlFor='re-password'>re-Password</label>
-                        <input  id='re-password' type="password" onChange={(e)=> setrePassword(e.target.value)} 
-                                autoComplete="on" className="user-password" 
-                                name='re-password' placeholder="กรุณากรอก" 
-                                required />
-                        {/* <button type="submit" className="btn" onClick= { withRouter(({ history }) => (() => LogInState(history))) }> Submit </button> */}
-                        <SubmitButton />
-                    {/* </form> */}
-                    <div className="user-login3party-signup">
-                        <p>-or-login-with-</p>
-                        {/* <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                        </fb:login-button>
-
-                        <div id="status"></div>
-                        <button onClick="logout()" >Logout</button> */}
-                    </div>  
+                    
+                    <label htmlFor='email' className="tag">Email</label>
+                    <input  id='email' type="email" onChange={(e)=> setEmail(e.target.value)} 
+                            autoComplete="on" className="user-username" 
+                            name='email' placeholder="กรุณากรอก EMAIL" 
+                            required />
+                    <label htmlFor='username'>UserName</label>
+                    <input  id='username' type="text" onChange={(e)=> setUsername(e.target.value)} 
+                            autoComplete="on" className="user-username" 
+                            name='username' placeholder="กรุณากรอก USERNAME" 
+                            required />
+                    <label htmlFor='password'>Password</label>
+                    <input  id='password' type="password" onChange={(e)=> setPassword(e.target.value)} 
+                            autoComplete="on" className="user-password" 
+                            name='password' placeholder="กรุณากรอก PASSWORD" 
+                            required />
+                    <label htmlFor='re-password'>re-Password</label>
+                    <input  id='re-password' type="password" onChange={(e)=> setrePassword(e.target.value)} 
+                            autoComplete="on" className="user-password" 
+                            name='re-password' placeholder="กรุณากรอก PASSWORD" 
+                            required />
+                     
+                    <SubmitButton />
+                    
+                    
                 </div>
             </div>
         </div>

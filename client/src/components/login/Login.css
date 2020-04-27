@@ -16,8 +16,8 @@
 .blurred-box {
     position: relative;
     width: 250px;
-    height: 450px;
-    top: calc(50% - 175px);
+    height: 480px;
+    top: calc(40% - 175px);
     left: calc(50% - 125px);
     background: inherit;
     border-radius: 2px;
@@ -31,7 +31,7 @@
 .blurred-box:after {
     content: "";
     width: 400px;
-    height: 400px;
+    height: 550px;
     background: inherit;
     position: absolute;
     left: -20px;
@@ -130,4 +130,15 @@ input.user-username, input.user-password {
     color: #fff;
     margin-bottom: 15px;
     margin: 5px 0;
+}
+
+.psupassport {
+    width: 130px;
+    height: 40px;
+    /* background-color: #fff; */
+    border-radius: 5%;
+    -webkit-border-radius: 5%;
+    -moz-border-radius: 5%;
+    -ms-border-radius: 5%;
+    -o-border-radius: 5%;
 }

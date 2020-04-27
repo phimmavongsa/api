@@ -6,6 +6,7 @@ import axios from 'axios';
 import HomePage from './components/homepage/Homepage';
 import Login from './components/login/Login';
 import Signup from './components/login/Signup';
+import PsuLogin from './components/login/PsuLogin';
 import PrivateRoute from './components/PrivateRoute';
 import CoronaPage from './components/corona/corona';
 import InputPost from './components/blogtemplate/InputForm';
@@ -26,7 +27,8 @@ const App =  ({ authenticated, checked }) => {
           <PrivateRoute exact path="/covid" component={CoronaPage} authenticated={authenticated} />
           <PrivateRoute exact path="/post" component={InputPost} authenticated={authenticated} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />       
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/psuauth" component={PsuLogin} />        
         </div>
       }
     </Router>
