@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../header/Header';
 import Coverpage from '../coverpage/coverpage';
 import PostLayOut from '../blogtemplate/PostLayOut'
-// import CoronaPage from './components/corona/corona';
+import Footer from '../footer/footer'
 
 const Homepage = () => {
   return (
@@ -10,8 +10,7 @@ const Homepage = () => {
       <Navbar />
       <Coverpage />
       <PostLayOut />
-      {/* <CoronaPage /> */}
-     
+      <Footer />  
     </div>
   );
 }

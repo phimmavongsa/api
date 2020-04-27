@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import Navbar from '../header/Header';
+import Footer from '../footer/footer'
 import axios from 'axios';
 import './corona.css'
 
@@ -88,63 +89,66 @@ const Corona = (props) => {
         // const {total_cases,total_deaths,total_recovered,new_cases,new_deaths} = WorldStat;
         // const {country_name,cases,new_cases,deaths,new_deaths,serious_critical,total_recovered,total_tests} = Cases;
     return (
-        <div className="wrapper">
-            <Navbar />
-        <div className="statistic">
-            <div className="total_case_box">
-                <h2>
-                    <i className="fa fa-address-book" aria-hidden="true"></i>
-                    Total Cases
-                </h2>
-                <p style={{fontSize: 3 +'rem'}} id="total_cases">{WorldStat.total_cases}</p>
+        <div className='body-covid'>
+            <div className="wrapper">
+                <Navbar />
+            <div className="statistic">
+                <div className="total_case_box">
+                    <h2>
+                        <i className="fa fa-address-book" aria-hidden="true"></i>
+                        Total Cases
+                    </h2>
+                    <p style={{fontSize: 3 +'rem'}} id="total_cases">{WorldStat.total_cases}</p>
+                </div>
+
+                <div className="box_wrapper">
+                    <div className="box">
+                        <h2>
+                            <i className="fa fa-user-times" aria-hidden="true"></i>
+                            Total Death
+                        </h2>
+                        <p style={{fontSize:1.5+'rem'}} id="total_death">{WorldStat.total_deaths}</p>
+                    </div>
+                    <div className="box">
+                        <h2>
+                            <i className="fa fa-refresh" aria-hidden="true"></i>
+                            Total Recovery
+                        </h2>
+                        <p style={{fontSize:1.5+'rem'}} id="total_recovered">{WorldStat.total_recovered}</p>
+                    </div>
+                    <div className="box">
+                        <h2>
+                            <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                            New Case
+                        </h2>
+                        <p style={{fontSize:1.5+'rem'}} id="new_case">{WorldStat.new_cases}</p>
+                    </div>
+                    <div className="box">
+                        <h2>
+                            <i className="fa fa-user-circle-o" aria-hidden="true"></i>
+                            New Death
+                        </h2>
+                        <p style={{fontSize:1.5+'rem'}} id="new_death">{WorldStat.new_deaths}</p>
+                    </div>
+                </div>
             </div>
 
-            <div className="box_wrapper">
-                <div className="box">
-                    <h2>
-                        <i className="fa fa-user-times" aria-hidden="true"></i>
-                        Total Death
-                    </h2>
-                    <p style={{fontSize:1.5+'rem'}} id="total_death">{WorldStat.total_deaths}</p>
-                </div>
-                <div className="box">
-                    <h2>
-                        <i className="fa fa-refresh" aria-hidden="true"></i>
-                        Total Recovery
-                    </h2>
-                    <p style={{fontSize:1.5+'rem'}} id="total_recovered">{WorldStat.total_recovered}</p>
-                </div>
-                <div className="box">
-                    <h2>
-                        <i className="fa fa-plus-circle" aria-hidden="true"></i>
-                        New Case
-                    </h2>
-                    <p style={{fontSize:1.5+'rem'}} id="new_case">{WorldStat.new_cases}</p>
-                </div>
-                <div className="box">
-                    <h2>
-                        <i className="fa fa-user-circle-o" aria-hidden="true"></i>
-                        New Death
-                    </h2>
-                    <p style={{fontSize:1.5+'rem'}} id="new_death">{WorldStat.new_deaths}</p>
-                </div>
-            </div>
+            <table className="countries_stat" id="countries_stat">
+                <tbody>
+                <tr>
+                    <th>Country</th>
+                    <th>Case</th>
+                    <th>New Case</th>
+                    <th>Deaths</th>
+                    <th>New Deaths</th>
+                    <th>Serious Critical</th>
+                    <th>Total Recovered</th>
+                </tr>
+                {printCasesByCountry()}
+                </tbody>
+            </table>
         </div>
-
-        <table className="countries_stat" id="countries_stat">
-            <tbody>
-            <tr>
-                <th>Country</th>
-                <th>Case</th>
-                <th>New Case</th>
-                <th>Deaths</th>
-                <th>New Deaths</th>
-                <th>Serious Critical</th>
-                <th>Total Recovered</th>
-            </tr>
-            {printCasesByCountry()}
-            </tbody>
-        </table>
+        <Footer />
     </div>
     )
 };

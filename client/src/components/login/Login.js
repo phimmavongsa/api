@@ -61,7 +61,7 @@ const Login = (props) => {
 
 
   return (
-        
+        <div className='body-login'>
             <div className="blurred-box">
                 <div className="user-login-box">
                     <span className="user-icon"></span>
@@ -88,6 +88,7 @@ const Login = (props) => {
                     </div>  
                 </div>
             </div>
+        </div>
   );
 }
 

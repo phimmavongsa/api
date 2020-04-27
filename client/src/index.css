@@ -22,6 +22,10 @@ html {
   color: #555;
 }
 
+body {
+  background-color: #fff;
+}
+
 ul, nav {
   list-style: none;
 }

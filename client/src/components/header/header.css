@@ -4,10 +4,11 @@ ul, nav {
 
 
 header .box-container {
-    margin: 0 auto;
+    margin: 0 0;
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
     z-index: 1;
     width: 100%;
     display: flex;
