@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState,useEffect }  from 'react';
+import axios from 'axios'
 import './coverpage.css';
 
-const coverpage = (props) => {
+const port = 8000;
+
+const Coverpage = (props) => {
+    const [Cover, setCover] = useState({});
+
+    useEffect(() => {
+        const get_Coverpage = async () => {
+            let result =await axios.get(`http://localhost:${port}/api/cover_pages`);
+            setCover(result.data);
+        }
+        get_Coverpage();
+    }, [props]);
+    console.log('Cover P :',Cover)
+
+
+
     return (
         <section className="hero" id="hero">
             <div className="background-image" ></div>
@@ -13,4 +29,4 @@ const coverpage = (props) => {
     )
 }
 
-export default coverpage;
+export default Coverpage;

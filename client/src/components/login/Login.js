@@ -7,32 +7,39 @@ import PropTypes from 'prop-types';
 import axios from 'axios'
 import './Login.css';
 
-let state = {}
+
 const port = 8000;
+
 const Login = (props) => {
     const user = useSelector( state => state.user );
+    const usersession = useSelector( state => state.usersession );
     const dispatch = useDispatch();
-    console.log('User : ', user);
-    console.log('resualt : ', state);
 
-    const logIn = async (history) => {
-        
+    console.log('Props : ', props);
+    console.log('user sesion : ', usersession);
+
+    const LogInState = async (history) => {
+    
         // console.log('User : ', user.username);
         await axios.get(`http://localhost:${port}/api/auth`);
-        let resualt = await axios.post(`http://localhost:${port}/api/auth?username=${user.username}&password=${user.password}`);
+        let result = await axios.post(`http://localhost:${port}/api/auth?username=${user.username}&password=${user.password}`);
         
-        state = resualt.data;
-        console.log('resualt : ', state);
+        // state = resualt.data;
+        // console.log('resualt : ', state);
         // console.log('resualt', resualt);
-        if(resualt.data.authenticated){
+        if(result.data.authenticated){
             dispatch( { 
                 type:'LOGIN', 
-                ...resualt.data
+                ...result.data
             } )
             const { login } = props.actions;
             login(user, history);
+
         }
-        // window.location.reload(); 
+        // history.push('/');
+        // window.location.reload(true);
+   
+
     }
 
     // const onSubmit = (history) => {
@@ -45,13 +52,13 @@ const Login = (props) => {
     const SubmitButton = withRouter(({ history }) => (
         <button
             className = 'btn'
-            onClick = {() => logIn(history)}
+            onClick = {() => LogInState(history)}
             type = "submit">
-            SubMit
+            LogIn
         </button>
       ))
     
-    
+
 
   return (
         
@@ -59,7 +66,7 @@ const Login = (props) => {
                 <div className="user-login-box">
                     <span className="user-icon"></span>
                     <div className="user-title">PSU PASSPORT</div>
-                    
+                    {/* <form   > */}
                         <input  type="text" onChange={(e) => dispatch({ type:'CHENG_USERNAME', username: e.target.value })} 
                                 autoComplete="username" className="user-username" 
                                 name='username' placeholder="Username" 
@@ -68,9 +75,9 @@ const Login = (props) => {
                                 autoComplete="current-password" className="user-password" 
                                 name='password' placeholder="Password" 
                                 required />
-                        {/* <button type="submit" className="btn" onClick={() => logIn(history)} > Submit </button> */}
+                        {/* <button type="submit" className="btn" onClick= { withRouter(({ history }) => (() => LogInState(history))) }> Submit </button> */}
                         <SubmitButton />
-
+                    {/* </form> */}
                     <div className="user-login3party">
                         <p>-or-login-with-</p>
                         {/* <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">

@@ -69,7 +69,7 @@ const userReducer = (userdata = initialUser, action) => {
     }
 }
 
-const initialSession2 = {
+const initialUserSession = {
     user:{ 
             userid : null,
             username : null,
@@ -79,7 +79,7 @@ const initialSession2 = {
     loginstate : false
 }
 
-const sessionReducer2 = (session = initialSession2, action) => {
+const userSessionReducer = (session = initialUserSession, action) => {
     switch(action.type) {
         case 'LOGIN' : 
             return {...session, user: { 
@@ -147,8 +147,8 @@ const reducers = combineReducers({
     user: userReducer,
     post: postReducer,
     form: formReducer,
-    session: sessionReducer,
-    session2: sessionReducer2
+    usersession: userSessionReducer,
+    session: sessionReducer
 })
 
 export const store = createStore(reducers, applyMiddleware(logger,thunkMiddleware));

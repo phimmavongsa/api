@@ -118,7 +118,7 @@ router.route('/session')
 
 router.route('/cover_pages')
     .get((req,res) => {
-        information.coverpage && information.coverpage.length != 0 ? res.json(information.coverpage):res.json({message:'Data Not Found'});
+        information.coverpage && information.coverpage.length != 0 ? res.json(information.coverpage):res.json({message:'NotFound'});
         res.end();
     });
 
