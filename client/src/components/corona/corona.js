@@ -54,8 +54,10 @@ const Corona = (props) => {
       const printCasesByCountry = () =>{
           if(CasesByCountry && CasesByCountry.length ){
             //   const {country_name,cases,new_cases,deaths,new_deaths,serious_critical,total_recovered,total_tests} = Cases;
-              return CasesByCountry.map( (cases,index) => {
-                  if( index !== 0 && cases.country_name !== "Thailand"){
+              return CasesByCountry
+              .filter( cases => cases.country_name !== '' )
+              .map( (cases,index) => {
+                //   if( index !== 0 && cases.country_name !== "Thailand"){
                     return (
                         <tr key={index} >
                             <td>{cases.country_name}</td>
@@ -67,19 +69,30 @@ const Corona = (props) => {
                             <td>{cases.total_recovered}</td>
                         </tr>
                       )
-                  } else if (cases.country_name === "Thailand" ){
-                    return (
-                        <tr key={index} style={{backgroundColor: "lightblue"}}  >
-                            <td>{cases.country_name}</td>
-                            <td>{cases.cases}</td>
-                            <td>{cases.new_cases}</td>
-                            <td>{cases.deaths}</td>
-                            <td>{cases.new_deaths}</td>
-                            <td>{cases.serious_critical}</td>
-                            <td>{cases.total_recovered}</td>
-                        </tr>
-                    )
-                  }
+                //   } else if (cases.country_name === "Thailand" ){
+                //     return (
+                //         <tr key={index} style={{backgroundColor: "lightblue"}}  >
+                //             <td>{cases.country_name}</td>
+                //             <td>{cases.cases}</td>
+                //             <td>{cases.new_cases}</td>
+                //             <td>{cases.deaths}</td>
+                //             <td>{cases.new_deaths}</td>
+                //             <td>{cases.serious_critical}</td>
+                //             <td>{cases.total_recovered}</td>
+                //         </tr>
+                //     )
+                //   }
+                //   return (
+                //     <tr key={index} >
+                //         <td>{cases.country_name}</td>
+                //         <td>{cases.cases}</td>
+                //         <td>{cases.new_cases}</td>
+                //         <td>{cases.deaths}</td>
+                //         <td>{cases.new_deaths}</td>
+                //         <td>{cases.serious_critical}</td>
+                //         <td>{cases.total_recovered}</td>
+                //     </tr>
+                //   )
               })
           } 
       }
@@ -90,8 +103,8 @@ const Corona = (props) => {
         // const {country_name,cases,new_cases,deaths,new_deaths,serious_critical,total_recovered,total_tests} = Cases;
     return (
         <div className='body-covid'>
-            <div className="wrapper">
-                <Navbar />
+            <Navbar />
+            <div className="wrapper">    
             <div className="statistic">
                 <div className="total_case_box">
                     <h2>

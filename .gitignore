@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 /facebook_api
+/test
+/server
 
 # testing
 /coverage

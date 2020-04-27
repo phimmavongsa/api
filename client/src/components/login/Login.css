@@ -94,13 +94,21 @@ input.user-username, input.user-password {
     -o-border-radius: 2px;
 }
 
-/* button { */
-.btn {
+/* button  */
+
+.btn-box {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: 25px;
+}
+
+.btn-box .btn-login {
     text-align: center;
-    padding: 5px 40px;
+    padding: 5px 15px;
     color: #fff;
-    margin: 15px 0;
-    opacity: 0.7;
+    margin: 15px 3px;
+    opacity: 0.8;
     cursor: pointer;
     border-radius: 5px;
     border: none;
@@ -112,8 +120,7 @@ input.user-username, input.user-password {
 
 }
 
-/* button:hover { */
-.btn:hover {
+.btn-box .btn-login:hover {
     opacity: 1;
     background-color: #33CC99;
     color: #fff;

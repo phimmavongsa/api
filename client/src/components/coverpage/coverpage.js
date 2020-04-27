@@ -1,22 +1,45 @@
 import React, { useState,useEffect }  from 'react';
 import { Zoom } from 'react-slideshow-image';
+import { useSelector } from 'react-redux';
 import axios from 'axios'
 import './coverpage.css';
 
 const port = 8000;
 
 const Coverpage = (props) => {
+    
+    const session = useSelector(state => state.session);
     const [Cover, setCover] = useState({});
+    const [Typing, setTyping] = useState('');
     let list = [];
 
     useEffect(() => {
+        let typeString = ["Developer","Entrepreneur","Idol","Singer","Student","Employer"];
+        let i = 0;
+        let count = 0;
+        let selectedText = '';
+        let text = '';
         const get_Coverpage = async () => {
             let result =await axios.get(`http://localhost:${port}/api/cover_pages`);
             setCover(result.data);
         }
+        const type = () => {
+            if(count === typeString.length){
+                count = 0;
+            }
+            selectedText = typeString[count];
+            text = selectedText.slice(0, ++i);
+            setTyping(text)
+            if(text.length === selectedText.length) {
+                count++;
+                i = 0;
+            }
+            setTimeout(type,500);
+        }
         get_Coverpage();
+        type();
     }, [props]);
-    // console.log('Cover P :',Cover)
+
 
     const zoomInProperties = {
         duration: 5000,
@@ -24,6 +47,8 @@ const Coverpage = (props) => {
         indicators: true,
         scale: 1.4,
         pauseOnHover: true,
+        arrows:false
+
       };
 
       const printCover = () => {
@@ -37,17 +62,10 @@ const Coverpage = (props) => {
 
       }
       printCover();
-    //   const [fadeImages] = Cover.img;
-      console.log('Cover P :',list)
+
+
     return (
-        // <section className="hero" id="hero">
-        //     <div className="background-image" ></div>
-        //     <h1>Responsive Flexbox Template</h1>
-            // <p>Hello I am <span id="typing" className="typing"></span></p>
-            // <h3>A freebie by Tutorialzine</h3>
-            // <a href="#hero" className="btn">Click Here</a>  
-            
-        // </section>
+
 
         <section className="hero" id="hero">
             <div className="slide-container ">
@@ -59,10 +77,10 @@ const Coverpage = (props) => {
                 </Zoom>
                 
             </div>
-            <h1>Responsive Flexbox Template</h1>
-            <p>Hello I am <span id="typing" className="typing"></span></p>
-            <h3>A freebie by Tutorialzine</h3>
-            <a href="#hero" className="btn">Click Here</a> 
+            <h1>Today, Have A Good Day</h1>
+            <h3>Hello {session.authenticated? session.user.username:'Guest'}</h3>
+            <p>Your are <span id="typing" className="typing">{Typing}</span></p>
+            <a href="/" className="btn">Click Here</a> 
         </section>
 
     )

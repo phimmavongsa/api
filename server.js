@@ -108,6 +108,16 @@ router.route('/users')
         information.users && information.users.length != 0 ? res.json(information.users):res.json({message:'Data Not Found'});
         res.end();
     })
+    .post((req,res) => {
+        console.log('SigUp :',req.query);
+        let user = {};
+        user.id = Math.floor(Math.random() * 100000);
+        user.email = req.query.email;
+        user.username = req.query.username;
+        user.password = req.query.password;
+        user.permission = 'user';
+        res.json({message:'ok'});
+    })
 
 router.route('/session')
     .get((req,res) => {

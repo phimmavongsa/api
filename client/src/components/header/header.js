@@ -15,7 +15,7 @@ const Header = () => {
                     <li><a href="/">Home</a></li>
                     {/* <li><a href="#our-work">Work</a></li> */}
                     <li><a href="/covid">Features</a></li>
-                    {/* <li><a href="#reviews">Reviews</a></li> */}
+                    <li><a href="/post">Post</a></li>
                     {/* <li><a href="#contact">Contacts</a></li> */}
                     {/* <li><h3>{session.user.username}</h3></li>
                     <li><LogOut /></li> */}

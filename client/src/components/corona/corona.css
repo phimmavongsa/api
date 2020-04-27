@@ -67,3 +67,21 @@ i {
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
 }
+
+@media only screen and (max-width: 1000px) {
+    .wrapper {
+        width: 900px;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .wrapper {
+        width: 600px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .wrapper {
+        width: 300px;
+    }
+}
