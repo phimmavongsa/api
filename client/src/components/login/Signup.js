@@ -52,22 +52,22 @@ const Signup = () => {
                     
                     <label htmlFor='email' className="tag">Email</label>
                     <input  id='email' type="email" onChange={(e)=> setEmail(e.target.value)} 
-                            autoComplete="on" className="user-username" 
+                            autoComplete="email" className="user-username" 
                             name='email' placeholder="กรุณากรอก EMAIL" 
                             required />
                     <label htmlFor='username'>UserName</label>
                     <input  id='username' type="text" onChange={(e)=> setUsername(e.target.value)} 
-                            autoComplete="on" className="user-username" 
+                            autoComplete="username" className="user-username" 
                             name='username' placeholder="กรุณากรอก USERNAME" 
                             required />
                     <label htmlFor='password'>Password</label>
                     <input  id='password' type="password" onChange={(e)=> setPassword(e.target.value)} 
-                            autoComplete="on" className="user-password" 
+                            autoComplete="new-password" className="user-password" 
                             name='password' placeholder="กรุณากรอก PASSWORD" 
                             required />
                     <label htmlFor='re-password'>re-Password</label>
                     <input  id='re-password' type="password" onChange={(e)=> setrePassword(e.target.value)} 
-                            autoComplete="on" className="user-password" 
+                            autoComplete="new-password" className="user-password" 
                             name='re-password' placeholder="กรุณากรอก PASSWORD" 
                             required />
                      

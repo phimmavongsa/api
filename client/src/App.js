@@ -15,8 +15,8 @@ import './App.css';
 axios.defaults.withCredentials = true;
 
 const App =  ({ authenticated, checked }) => {
-  const session = useSelector(state => state.session);
-  console.log('Session App : ',session);
+  // const session = useSelector(state => state.session);
+  // console.log('Session App : ',session);
 
 
   return (

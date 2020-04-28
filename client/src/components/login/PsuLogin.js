@@ -12,13 +12,13 @@ const port = 8000;
 
 const PsuLogin = (props) => {
     const user = useSelector( state => state.user );
-    const usersession = useSelector( state => state.usersession );
+    // const usersession = useSelector( state => state.usersession );
     const dispatch = useDispatch();
     // let historynow = useHistory();
 
-    console.log('Props : ', props);
-    console.log('user sesion : ', usersession);
-    console.log('user  : ', user);
+    // console.log('Props : ', props);
+    // console.log('user sesion : ', usersession);
+    // console.log('user  : ', user);
 
     useEffect( () => {
         const updateuser = async() => {
@@ -31,14 +31,14 @@ const PsuLogin = (props) => {
         // await axios.post(`http://localhost:${port}/api/psu_auth?username=${user.username}&&password=${user.password}`)
         await axios.post(`http://localhost:${port}/api/psu_auth`, null, {params:user})
         .then( (response) => {
-            console.log('POST : ',response.data);
+            // console.log('POST : ',response.data);
             if(response.data.authenticated){
-                // dispatch( { 
-                //     type:'LOGIN', 
-                //     ...response.data
-                // } )
+                dispatch( { 
+                    type:'LOGIN', 
+                    ...response.data
+                } )
                 const { login } = props.actions;
-                login(user, history);
+                login(response.data, history);
     
             }else{
                 // console.log('POST : ',response);
@@ -93,14 +93,14 @@ const PsuLogin = (props) => {
                     <div className="user-title">PSU PASSPORT</div>
                     
                         <input  type="text" onChange={(e) => dispatch({ type:'CHENG_USERNAME', username: e.target.value })} 
-                                autoComplete="on" className="user-username" 
+                                autoComplete="username" className="user-username" 
                                 name='username' placeholder="Username" 
                                 autoFocus required />
                         <input type="password" onChange={(e) => dispatch({ type:'CHENG_PASSWORD', password: e.target.value })} 
-                                autoComplete="on" className="user-password" 
+                                autoComplete="current-password" className="user-password" 
                                 name='password' placeholder="Password" 
                                 required />
-                        <div className='btn-box'>
+                        <div className='btn-box-psu'>
                             <SubmitButton />
                             {/* <SignButton /> */}
                         </div>

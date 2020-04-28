@@ -101,13 +101,24 @@ router.route('/auth')
         }    
     }
     console.log(callbackData);
-    res.json(callbackData);
+    if(callbackData.authenticated) {
+        console.log('login Success!!!');
+        res.json( {
+                    authenticated : true,
+                    userid : callbackData.userid,
+                    username : callbackData.permission,
+                    permission: callbackData.permission
+                });
+    }else{
+        console.log('login false!!!');
+        res.json({authenticated:false});
+    }
     res.end();
 })
 
 router.route('/psu_auth')
     .post((req, res) => {
-        console.log('PSU : ',req.query);
+        // console.log('PSU : ',req.query);
         soap.createClient(urlPSUAuth, (err, client) => {
             if (err) console.error(err);
             else {
@@ -119,13 +130,18 @@ router.route('/psu_auth')
                     client.GetStudentDetails(user, (err, response) => {
                     if (err) console.error(err);
 
-                    console.log('resualt',response.GetStudentDetailsResult);
+                    // console.log('resualt',response.GetStudentDetailsResult);
 
                     if(response.GetStudentDetailsResult.string[0] != '') {
-                        console.log('1');
-                        res.json({authenticated:true});
+                        console.log('PSU PASSPORT login Success!!!');
+                        res.json( {
+                                    authenticated : true,
+                                    userid : response.GetStudentDetailsResult.string[0],
+                                    username : response.GetStudentDetailsResult.string[1]+' '+response.GetStudentDetailsResult.string[2],
+                                    permission: 'user'
+                                });
                     }else{
-                        console.log('0');
+                        console.log('PSU PASSPORT login false!!!');
                         res.json({authenticated:false});
                     }
                 });

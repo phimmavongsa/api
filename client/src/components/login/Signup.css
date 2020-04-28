@@ -31,7 +31,7 @@
 .blurred-box-signup:after {
     content: "";
     width: 400px;
-    height: 500px;
+    height: 550px;
     background: inherit;
     position: absolute;
     left: -20px;

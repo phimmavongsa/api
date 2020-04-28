@@ -15,7 +15,7 @@
 .blurred-box-psu {
     position: relative;
     width: 250px;
-    height: 350px;
+    height: 320px;
     top: calc(40% - 175px);
     left: calc(50% - 125px);
     background: inherit;
@@ -30,7 +30,7 @@
 .blurred-box-psu:after {
     content: "";
     width: 400px;
-    height: 400px;
+    height: 350px;
     background: inherit;
     position: absolute;
     left: -20px;
@@ -53,4 +53,27 @@
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+}
+
+.btn-box-psu .btn-login {
+    text-align: center;
+    padding: 5px 15px;
+    color: #fff;
+    margin: 15px 3px;
+    opacity: 0.8;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: #33CC99;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+
+}
+
+.btn-box-psu .btn-login:hover {
+    opacity: 1;
+    background-color: #33CC99;
+    color: #fff;
 }

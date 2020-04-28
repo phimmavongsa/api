@@ -13,12 +13,12 @@ const port = 8000;
 
 const Login = (props) => {
     const user = useSelector( state => state.user );
-    const usersession = useSelector( state => state.usersession );
+    // const usersession = useSelector( state => state.usersession );
     const dispatch = useDispatch();
     let historynow = useHistory();
 
-    console.log('Props : ', props);
-    console.log('user sesion : ', usersession);
+    // console.log('Props : ', props);
+    // console.log('user sesion : ', usersession);
 
     useEffect( () => {
         const updateuser = async() => {
@@ -31,14 +31,14 @@ const Login = (props) => {
         // await axios.post(`http://localhost:${port}/api/auth?username=${user.username}&&password=${user.password}`)
         await axios.post(`http://localhost:${port}/api/auth`, null, {params:user})
         .then( (response) => {
-            // console.log('POST : ',response);
+            console.log('POST : ',response.data);
             if(response.data.authenticated){
                 dispatch( { 
                     type:'LOGIN', 
                     ...response.data
                 } )
                 const { login } = props.actions;
-                login(user, history);
+                login(response.data, history);
     
             }else{
                 historynow.push('/');

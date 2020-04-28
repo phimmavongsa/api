@@ -80,7 +80,7 @@ const Coverpage = (props) => {
             <h1>Today, Have A Good Day</h1>
             <h3>Hello {session.authenticated? session.user.username:'Guest'}</h3>
             <p>Your are <span id="typing" className="typing">{Typing}</span></p>
-            <a href="/" className="btn">Click Here</a> 
+            {/* <a href="/" className="btn">Click Here</a>  */}
         </section>
 
     )
