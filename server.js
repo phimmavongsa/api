@@ -20,7 +20,7 @@ let information = {};
 let callbackData = { authenticated:false };
 
 app.use( cors({ 
-    origin: ['http://localhost:3000'], 
+    origin: true, 
     methods: ['GET', 'POST','PUT','DELETE'], 
     credentials: true 
 }));
@@ -106,7 +106,8 @@ router.route('/auth')
         res.json( {
                     authenticated : true,
                     userid : callbackData.userid,
-                    username : callbackData.permission,
+                    username : callbackData.username,
+                    picture : false,
                     permission: callbackData.permission
                 });
     }else{
@@ -138,6 +139,7 @@ router.route('/psu_auth')
                                     authenticated : true,
                                     userid : response.GetStudentDetailsResult.string[0],
                                     username : response.GetStudentDetailsResult.string[1]+' '+response.GetStudentDetailsResult.string[2],
+                                    picture : false,
                                     permission: 'user'
                                 });
                     }else{

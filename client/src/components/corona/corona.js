@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import Navbar from '../header/Header';
-import Footer from '../footer/footer'
+import Footer from '../footer/footer';
 import axios from 'axios';
 import './corona.css'
 

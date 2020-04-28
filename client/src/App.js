@@ -10,13 +10,14 @@ import PsuLogin from './components/login/PsuLogin';
 import PrivateRoute from './components/PrivateRoute';
 import CoronaPage from './components/corona/corona';
 import InputPost from './components/blogtemplate/InputForm';
+import Policy from './components/policy/privacy__policy';
 import './App.css';
 
 axios.defaults.withCredentials = true;
 
 const App =  ({ authenticated, checked }) => {
-  // const session = useSelector(state => state.session);
-  // console.log('Session App : ',session);
+  const session = useSelector(state => state.session);
+  console.log('Session App : ',session);
 
 
   return (
@@ -28,7 +29,8 @@ const App =  ({ authenticated, checked }) => {
           <PrivateRoute exact path="/post" component={InputPost} authenticated={authenticated} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/psuauth" component={PsuLogin} />        
+          <Route exact path="/psuauth" component={PsuLogin} /> 
+          <Route exact path="/policy" component={Policy} />       
         </div>
       }
     </Router>

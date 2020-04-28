@@ -6,15 +6,18 @@ import { withRouter,useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios'
 import PsuPassport from './psupassport.png';
+import FacebookLogin from 'react-facebook-login';
+// import GoogleLogin from 'react-google-login';
 import './Login.css';
 
-
-const port = 8000;
 
 const Login = (props) => {
     const user = useSelector( state => state.user );
     // const usersession = useSelector( state => state.usersession );
     const dispatch = useDispatch();
+    // const GoogleID = '587544336772-dk14bvn9bn77em75i74apm1qdp1vt4mr.apps.googleusercontent.com';
+    const FacebookID = '144659823540577';
+    const port = 8000;
     let historynow = useHistory();
 
     // console.log('Props : ', props);
@@ -57,15 +60,33 @@ const Login = (props) => {
             type = "submit">
             เข้าสู่ระบบ
         </button>
-      ))
+      ));
 
       const SignButton = withRouter(({ history }) => (
         <a href='/signup'>
             <button className = 'btn-login'>สมัครสมาชิก</button>
         </a>
-      ))
-    
-    
+      ));
+
+      const responseFacebook = (response) => {
+        // console.log('Facebook : ',response);
+        // console.log('Pic Facebook : ',response.picture.data.url);  
+        const { login } = props.actions;
+        let data = {
+          userid : response.id,
+          username: response.name,
+          picture : response.picture.data.url,
+          permission :'facebook_user'
+          
+        }
+        login(data, historynow);
+      }
+
+      // const responseGoogle = (response) => {
+      //   console.log('Google : ',response);
+      // }
+
+
 
 
   return (
@@ -89,17 +110,28 @@ const Login = (props) => {
                         </div>
                          
                         <div className="user-login3party">
-                            <p>-Or-LogIn-With-</p>
+                            <p>- Or login with -</p>
                             <a href='/psuauth'>
                                 <img className='psupassport' src={PsuPassport} alt='psupassport' />      
-                            </a>
+                            </a><br />
+                              
+                            <FacebookLogin
+                              appId={FacebookID}
+                              fields="name,email,picture"
+                              scope="public_profile,user_friends"
+                              callback={responseFacebook}
+                            />
+                           
                             
-                            
-                            {/* <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                            </fb:login-button>
 
-                            <div id="status"></div>
-                            <button onClick="logout()" >Logout</button> */}
+                            {/* <GoogleLogin
+                              clientId= {GoogleID}
+                              buttonText="LOGIN WITH GOOGLE"
+                              onSuccess={responseGoogle}
+                              onFailure={responseGoogle}
+                            /> */}
+                            
+                            
                         </div>  
                 </div>
             </div>

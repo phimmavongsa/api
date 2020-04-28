@@ -6,6 +6,7 @@ export const login = (user) => {
     data: {
       userid : user.userid,
       username : user.username,
+      picture : user.picture,
       permission : user.permission
     }
   };
