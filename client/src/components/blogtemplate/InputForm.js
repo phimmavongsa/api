@@ -1,9 +1,9 @@
-import React from 'react'
-import './InputForm.css'
-import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
+import React from 'react';
+import './InputForm.css';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import Navbar from '../header/Header';
-import Footer from '../footer/footer'
+import Footer from '../footer/footer';
 
 const port = 8080
 
@@ -12,6 +12,7 @@ const InputForm = () => {
     const form = useSelector( state => state.form )
     const students = useSelector( state => state.student )
     console.log('Form : ' ,form)
+
     const addstudent = async () => {
         await axios.post(`http://localhost:${port}/api/students`, form)
         dispatch( { 

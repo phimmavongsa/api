@@ -1,14 +1,14 @@
-import React,{ useEffect } from 'react';
+import React from 'react';
 import * as sessionActions from '../actions/sessionActions';
-import { useSelector, useDispatch, connect } from 'react-redux'
+import { useSelector, useDispatch, connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios'
+import axios from 'axios';
 import './PsuLogin.css';
 
 
-const port = 8000;
+// const port = 8000;
 
 const PsuLogin = (props) => {
     const user = useSelector( state => state.user );
@@ -20,16 +20,17 @@ const PsuLogin = (props) => {
     // console.log('user sesion : ', usersession);
     // console.log('user  : ', user);
 
-    useEffect( () => {
-        const updateuser = async() => {
-            await axios.get(`http://localhost:${port}/api/auth`);
-        }
-        updateuser();
-      } , [props] )
+    // useEffect( () => {
+    //     const updateuser = async() => {
+    //         await axios.get(`http://localhost:${port}/api/auth`);
+    //     }
+    //     updateuser();
+    //   } , [props] )
 
     const LogInState = async (history) => {
         // await axios.post(`http://localhost:${port}/api/psu_auth?username=${user.username}&&password=${user.password}`)
-        await axios.post(`http://localhost:${port}/api/psu_auth`, null, {params:user})
+        // await axios.post(`http://localhost:${port}/api/psu_auth`, null, {params:user})
+        await axios.post(`${process.env.REACT_APP_API_URL}/psu_auth`, null, {params:user})
         .then( (response) => {
             // console.log('POST : ',response.data);
             if(response.data.authenticated){
@@ -47,7 +48,7 @@ const PsuLogin = (props) => {
             }
           })
           .catch( (error) => {
-            console.log('Error :',error);
+            console.log(error);
           });
 
 
@@ -91,21 +92,17 @@ const PsuLogin = (props) => {
                 <div className="user-login-box">
                     <span className="user-icon-psu"></span>
                     <div className="user-title">PSU PASSPORT</div>
-                    
-                        <input  type="text" onChange={(e) => dispatch({ type:'CHENG_USERNAME', username: e.target.value })} 
-                                autoComplete="username" className="user-username" 
-                                name='username' placeholder="Username" 
-                                autoFocus required />
-                        <input type="password" onChange={(e) => dispatch({ type:'CHENG_PASSWORD', password: e.target.value })} 
-                                autoComplete="current-password" className="user-password" 
-                                name='password' placeholder="Password" 
-                                required />
-                        <div className='btn-box-psu'>
-                            <SubmitButton />
-                            {/* <SignButton /> */}
-                        </div>
-                         
-                        
+                    <input  type="text" onChange={(e) => dispatch({ type:'CHENG_USERNAME', username: e.target.value })} 
+                            autoComplete="username" className="user-username" 
+                            name='username' placeholder="Username" 
+                            autoFocus required />
+                    <input type="password" onChange={(e) => dispatch({ type:'CHENG_PASSWORD', password: e.target.value })} 
+                            autoComplete="current-password" className="user-password" 
+                            name='password' placeholder="Password" 
+                            required />
+                    <div className='btn-box-psu'>
+                        <SubmitButton />
+                    </div>   
                 </div>
             </div>
         </div>

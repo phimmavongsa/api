@@ -126,7 +126,7 @@ input.user-username, input.user-password {
     color: #fff;
 }
 .user-login3party {
-    width: 100%;
+    width: 80%;
     height: 100%;
     margin-top: 10px;
 }
@@ -141,7 +141,7 @@ input.user-username, input.user-password {
 .user-login3party  .psupassport {
     width: 130px;
     height: 40px;
-    /* background-color: #fff; */
+    margin-bottom: 10px;
     border-radius: 5%;
     -webkit-border-radius: 5%;
     -moz-border-radius: 5%;

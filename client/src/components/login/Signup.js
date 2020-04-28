@@ -1,10 +1,10 @@
 import React,{ useState } from 'react';
 import { withRouter,useHistory } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 import './Signup.css';
 
 
-const port = 8000;
+// const port = 8000;
 
 const Signup = () => {
     const [Email, setEmail] = useState('');
@@ -16,9 +16,26 @@ const Signup = () => {
     const SignupState = async () => {
         if( Email && Username && Password && rePassword ){
             if(Password === rePassword){
-                await axios.post(`http://localhost:${port}/api/users?email=${Email}&&username=${Username}&&password=${Password}`);
-                alert('สมัครเสร็จเรียบร้อย  สามารถเข้าสู่ระบบได้แล้ว');
-                history.push('/login');
+                // await axios.post(`http://localhost:${port}/api/users?email=${Email}&&username=${Username}&&password=${Password}`);
+                await axios.post(`${process.env.REACT_APP_API_URL}/users`, null, 
+                {
+                    params: { 
+                                email : Email,
+                                username : Username,
+                                password : Password
+                            }
+                })
+                .then( (response) => {
+                    alert('สมัครเสร็จเรียบร้อย  สามารถเข้าสู่ระบบได้แล้ว');
+                    history.push('/login');
+                })
+                .catch( (error) => {
+                    console.log(error);
+                  });
+
+                // alert('สมัครเสร็จเรียบร้อย  สามารถเข้าสู่ระบบได้แล้ว');
+                // history.push('/login');
+
             } else {
                 console.log('Password not match');
                 alert('โปรดใส่รหัสผ่านให้ถูกต้อง');

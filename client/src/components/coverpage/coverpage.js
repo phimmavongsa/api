@@ -1,10 +1,10 @@
 import React, { useState,useEffect }  from 'react';
 import { Zoom } from 'react-slideshow-image';
 import { useSelector } from 'react-redux';
-import axios from 'axios'
+import axios from 'axios';
 import './coverpage.css';
 
-const port = 8000;
+// const port = 8000;
 
 const Coverpage = (props) => {
     
@@ -20,8 +20,15 @@ const Coverpage = (props) => {
         let selectedText = '';
         let text = '';
         const get_Coverpage = async () => {
-            let result =await axios.get(`http://localhost:${port}/api/cover_pages`);
-            setCover(result.data);
+            // let result = await axios.get(`http://localhost:${port}/api/cover_pages`);
+            await axios.get(`${process.env.REACT_APP_API_URL}/cover_pages`)
+            .then( (response) => {
+                setCover(response.data);
+            })
+            .catch( (error) => {
+                console.log(error);
+            });
+            // setCover(result.data);
         }
         const type = () => {
             if(count === typeString.length){

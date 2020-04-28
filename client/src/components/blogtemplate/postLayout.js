@@ -1,7 +1,6 @@
 import React from 'react';
 import './PostLayOut.css';
-
-import PostList from './PostList'
+import PostList from './PostList';
 
 const PostLayOut = () => {
   return (

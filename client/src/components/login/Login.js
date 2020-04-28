@@ -1,10 +1,10 @@
 import React,{ useEffect } from 'react';
 import * as sessionActions from '../actions/sessionActions';
-import { useSelector, useDispatch,connect } from 'react-redux'
+import { useSelector, useDispatch,connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter,useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios'
+import axios from 'axios';
 import PsuPassport from './psupassport.png';
 import FacebookLogin from 'react-facebook-login';
 // import GoogleLogin from 'react-google-login';
@@ -16,8 +16,10 @@ const Login = (props) => {
     // const usersession = useSelector( state => state.usersession );
     const dispatch = useDispatch();
     // const GoogleID = '587544336772-dk14bvn9bn77em75i74apm1qdp1vt4mr.apps.googleusercontent.com';
-    const FacebookID = '144659823540577';
-    const port = 8000;
+    // const FacebookID = '144659823540577';
+    // const tsport = process.env.API_URL;
+    // console.log('env test : ',tsport);
+    // const port = 8000;
     let historynow = useHistory();
 
     // console.log('Props : ', props);
@@ -25,14 +27,16 @@ const Login = (props) => {
 
     useEffect( () => {
         const updateuser = async() => {
-            await axios.get(`http://localhost:${port}/api/auth`);
+            // await axios.get(`http://localhost:${port}/api/auth`);
+            await axios.get(`${process.env.REACT_APP_API_URL}/auth`);
         }
         updateuser();
       } , [props] )
 
     const LogInState = async (history) => {
         // await axios.post(`http://localhost:${port}/api/auth?username=${user.username}&&password=${user.password}`)
-        await axios.post(`http://localhost:${port}/api/auth`, null, {params:user})
+        // await axios.post(`http://localhost:${port}/api/auth`, null, {params:user})
+        await axios.post(`${process.env.REACT_APP_API_URL}/auth`, null, {params:user})
         .then( (response) => {
             console.log('POST : ',response.data);
             if(response.data.authenticated){
@@ -97,11 +101,11 @@ const Login = (props) => {
                     <div className="user-title">เข้าสู่ระบบ</div>
                     
                         <input  type="text" onChange={(e) => dispatch({ type:'CHENG_USERNAME', username: e.target.value })} 
-                                autoComplete="on" className="user-username" 
+                                autoComplete="username" className="user-username" 
                                 name='username' placeholder="Username" 
                                 autoFocus required />
                         <input type="password" onChange={(e) => dispatch({ type:'CHENG_PASSWORD', password: e.target.value })} 
-                                autoComplete="on" className="user-password" 
+                                autoComplete="current-password" className="user-password" 
                                 name='password' placeholder="Password" 
                                 required />
                         <div className='btn-box'>
@@ -113,13 +117,18 @@ const Login = (props) => {
                             <p>- Or login with -</p>
                             <a href='/psuauth'>
                                 <img className='psupassport' src={PsuPassport} alt='psupassport' />      
-                            </a><br />
+                            </a>
                               
                             <FacebookLogin
-                              appId={FacebookID}
-                              fields="name,email,picture"
-                              scope="public_profile,user_friends"
-                              callback={responseFacebook}
+                              appId = { process.env.REACT_APP_FACEBOOK_CLIENT_ID }
+                              size = "small"
+                              isMobile = {true}
+                              fields = "name,email,picture"
+                              scope = "public_profile,user_friends"
+                              callback = {responseFacebook}
+                              icon = "fa-facebook"
+                              textButton = "Facebook"
+                              
                             />
                            
                             

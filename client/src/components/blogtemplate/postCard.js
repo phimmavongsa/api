@@ -1,9 +1,10 @@
 import React from 'react';
 import './PostCard.css';
-import { useSelector,useDispatch } from 'react-redux'
-import axios from 'axios'
+import { useSelector,useDispatch } from 'react-redux';
+import axios from 'axios';
 
 const port = 8000
+
 const PostCard = props => {
     const form = useSelector( state => state.form )
     const dispatch = useDispatch();

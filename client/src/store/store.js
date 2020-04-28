@@ -69,40 +69,40 @@ const userReducer = (userdata = initialUser, action) => {
     }
 }
 
-const initialUserSession = {
-    user:{ 
-            userid : null,
-            username : null,
-            permission :null
-        },
-    authenticated : false,
-    loginstate : false
-}
+// const initialUserSession = {
+//     user:{ 
+//             userid : null,
+//             username : null,
+//             permission :null
+//         },
+//     authenticated : false,
+//     loginstate : false
+// }
 
-const userSessionReducer = (session = initialUserSession, action) => {
-    switch(action.type) {
-        case 'LOGIN' : 
-            return {...session, user: { 
-                                        userid : action.userid,
-                                        username : action.username,
-                                        permission : action.permission
-                                    },
-                                authenticated : true,
-                                loginstate : true
-                    }
-        case 'LOGOUT' : 
-            return {...session, user: { 
-                                        userid : null,
-                                        username : null,
-                                        permission : null
-                                    },
-                                authenticated : true,
-                                loginstate : true
-                    }
-        default :
-            return session
-    }
-}
+// const userSessionReducer = (session = initialUserSession, action) => {
+//     switch(action.type) {
+//         case 'LOGIN' : 
+//             return {...session, user: { 
+//                                         userid : action.userid,
+//                                         username : action.username,
+//                                         permission : action.permission
+//                                     },
+//                                 authenticated : true,
+//                                 loginstate : true
+//                     }
+//         case 'LOGOUT' : 
+//             return {...session, user: { 
+//                                         userid : null,
+//                                         username : null,
+//                                         permission : null
+//                                     },
+//                                 authenticated : true,
+//                                 loginstate : true
+//                     }
+//         default :
+//             return session
+//     }
+// }
 
 // const studentReducer = (students = [], action) => {
 //     switch(action.type) {
@@ -147,7 +147,7 @@ const reducers = combineReducers({
     user: userReducer,
     post: postReducer,
     form: formReducer,
-    usersession: userSessionReducer,
+    // usersession: userSessionReducer,
     session: sessionReducer
 })
 

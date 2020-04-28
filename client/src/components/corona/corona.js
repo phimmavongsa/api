@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import Navbar from '../header/Header';
 import Footer from '../footer/footer';
 import axios from 'axios';
-import './corona.css'
+import './corona.css';
 
 
 const Corona = (props) => {
@@ -17,8 +17,8 @@ const Corona = (props) => {
             "url":"https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php",
             "headers":{
             "content-type":"application/octet-stream",
-            "x-rapidapi-host":"coronavirus-monitor.p.rapidapi.com",
-            "x-rapidapi-key":"56cf0ef69amshb9e5cc1ebc4c3ddp17e6d0jsn72eb4f2a92ce"
+            "x-rapidapi-host": process.env.REACT_APP_RAPIDAPI_HOST,
+            "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY
             }
             })
             .then((response)=>{
@@ -34,8 +34,8 @@ const Corona = (props) => {
                 "url":"https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php",
                 "headers":{
                 "content-type":"application/octet-stream",
-                "x-rapidapi-host":"coronavirus-monitor.p.rapidapi.com",
-                "x-rapidapi-key":"56cf0ef69amshb9e5cc1ebc4c3ddp17e6d0jsn72eb4f2a92ce"
+                "x-rapidapi-host": process.env.REACT_APP_RAPIDAPI_HOST,
+                "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY
                 }
                 })
                 .then((response)=>{
@@ -43,7 +43,7 @@ const Corona = (props) => {
                 })
                 .catch((error)=>{
                   console.log(error)
-                })
+                });
         }
         WorldStat_Data();
         Cases_Country();
