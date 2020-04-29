@@ -28,11 +28,11 @@ const App =  ({ authenticated, checked }) => {
           <PrivateRoute exact path="/" component={HomePage} authenticated={authenticated} />
           <PrivateRoute exact path="/covid" component={CoronaPage} authenticated={authenticated} />
           <PrivateRoute exact path="/post" component={InputPost} authenticated={authenticated} />
+          <PrivateRoute exact path="/view" component={ViewPost} authenticated={authenticated} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/psuauth" component={PsuLogin} /> 
-          <Route exact path="/policy" component={Policy} />  
-          <Route exact path="/view" component={ViewPost} />     
+          <Route exact path="/policy" component={Policy} />    
         </div>
       }
     </Router>
