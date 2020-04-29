@@ -29,7 +29,6 @@ import logger from 'redux-logger'
 
 const initialForm = {
     userid: '',
-    name:'',
     img:'',
     topic:'',
     txt: ''
@@ -39,11 +38,9 @@ const formReducer = (data = initialForm, action) => {
     switch(action.type) {
         case 'CHENG_USERID' : 
             return {...data, userid: action.userid};
-        case 'CHENG_NAME' : 
-            return {...data, name: action.name};
         case 'CHENG_IMG' : 
-            return {...data, ing: action.img};
-        case 'CHENG_TONPIC' : 
+            return {...data, img: action.img};
+        case 'CHENG_TOPIC' : 
             return {...data, topic: action.topic};
         case 'CHENG_TXT' : 
             return {...data, txt: action.txt};

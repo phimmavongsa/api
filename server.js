@@ -219,7 +219,7 @@ router.route('/posts')
         post.topic = req.query.topic;
         post.txt = req.query.txt;
         post.img = req.query.img;
-
+        console.log(post);
         (async () => {
             try {
               const db = client.db(dbName);

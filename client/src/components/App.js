@@ -10,6 +10,7 @@ import PsuLogin from './login/PsuLogin';
 import PrivateRoute from './PrivateRoute';
 import CoronaPage from './corona/corona';
 import InputPost from './blogtemplate/InputForm';
+import ViewPost from './blogtemplate/ViewPost';
 import Policy from './policy/privacy__policy';
 import './App.css';
 
@@ -30,7 +31,8 @@ const App =  ({ authenticated, checked }) => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/psuauth" component={PsuLogin} /> 
-          <Route exact path="/policy" component={Policy} />       
+          <Route exact path="/policy" component={Policy} />  
+          <Route exact path="/view" component={ViewPost} />     
         </div>
       }
     </Router>

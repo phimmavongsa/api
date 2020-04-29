@@ -14,6 +14,7 @@ const Header = () => {
         </a>
       ));
 
+     
     return (
         <header>
             <div className='box-container'>
@@ -39,9 +40,6 @@ const Header = () => {
                     {   !session.authenticated && 
                         <LoginButton />
                     }
-
-                    
-                    
 
                 </nav>
 
