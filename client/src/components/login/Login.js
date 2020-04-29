@@ -9,7 +9,6 @@ import PsuPassport from './psupassport.png';
 import FacebookLogin from 'react-facebook-login';
 import './Login.css';
 
-
 const Login = (props) => {
     const user = useSelector( state => state.user );
     const dispatch = useDispatch();
@@ -53,7 +52,7 @@ const Login = (props) => {
         </button>
       ));
 
-      const SignButton = withRouter(({ history }) => (
+      const SignButton = (() => (
         <a href='/signup'>
             <button className = 'btn-login'>สมัครสมาชิก</button>
         </a>

@@ -1,13 +1,13 @@
 import React from 'react';
-import { useSelector,connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import PrivateRoute from './PrivateRoute';
 import HomePage from './homepage/Homepage';
 import Login from './login/Login';
 import Signup from './login/Signup';
 import PsuLogin from './login/PsuLogin';
-import PrivateRoute from './PrivateRoute';
 import CoronaPage from './corona/corona';
 import InputPost from './blogtemplate/InputForm';
 import ViewPost from './blogtemplate/ViewPost';
@@ -18,10 +18,7 @@ import './App.css';
 axios.defaults.withCredentials = true;
 
 const App =  ({ authenticated, checked }) => {
-  const session = useSelector(state => state.session);
-  console.log('Session App : ',session);
-
-
+ 
   return (
       <Router>
       { checked &&

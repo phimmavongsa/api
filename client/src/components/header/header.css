@@ -20,19 +20,6 @@ header .box-container {
 
 }
 
-/* header .box-container:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    opacity: 0.2;
-} */
-/* header h2 {
-    font-style: 'Quicksand', sans-serif;
-} */
 
 header .box-container .logo {
     width: 200px;
@@ -176,10 +163,6 @@ header .box-container nav .user-display p {
     header {
         flex-direction: column;
     }
-/* 
-    header h2 {
-        margin-bottom: 15px;
-    } */
 
     header .box-container nav .user-display{
         display: none;

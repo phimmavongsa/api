@@ -1,8 +1,4 @@
 
-/* .background-image {
-    background-image: url('../images/tom-unsplash.jpg');
-} */
-
 .hero {
     position: relative;
     justify-content: center;
@@ -19,7 +15,6 @@
     width: 100%;
     height: 100%;
     background-size: cover;
-    /* background-color: #2196f3; */
     z-index: -1;
 }
 

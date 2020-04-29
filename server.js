@@ -1,12 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
-// const assert = require('assert');
-const session = require('express-session');
-// const { matchedData } = require("express-validator")
 const bodyParser = require('body-parser');
 const soap = require('soap');
-// const path = require('path');
 const router = express.Router();
 const env = require('dotenv').config();
 const app = express();
@@ -24,17 +20,9 @@ app.use( cors({
     methods: ['GET', 'POST','PUT','DELETE'], 
     credentials: true 
 }));
-// app.use(cors());
+
 app.use('/api', bodyParser.urlencoded({ extended: true }), router);
 app.use('/api', bodyParser.json(), router);
-app.use( session({
-    secret: process.env.SESSION_SECRET,
-    key: process.env.SESSION_KEY,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 600000 }
-}));
-
 
 (async () => {
     try {
@@ -127,7 +115,6 @@ router.route('/psu_auth')
                 user.username = req.query.username
                 user.password = req.query.password
 
-                // client.GetStaffDetails(user, function (err, response) {
                     client.GetStudentDetails(user, (err, response) => {
                     if (err) console.error(err);
 
@@ -181,13 +168,6 @@ router.route('/users')
         res.json({message:'ok'});
         res.end();
     })
-
-// router.route('/session')
-//     .get((req,res) => {
-//         session.loggedin == true ? res.json({username:'Nat', message:'true'}):res.json({username:'null', message:'false'});
-//         // information[1] && information[1].length != 0  ? res.json(information[1]):res.json({message:'Data Not Found'});
-//         res.end();
-//     })
 
 router.route('/cover_pages')
     .get((req,res) => {
