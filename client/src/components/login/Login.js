@@ -7,35 +7,22 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import PsuPassport from './psupassport.png';
 import FacebookLogin from 'react-facebook-login';
-// import GoogleLogin from 'react-google-login';
 import './Login.css';
 
 
 const Login = (props) => {
     const user = useSelector( state => state.user );
-    // const usersession = useSelector( state => state.usersession );
     const dispatch = useDispatch();
-    // const GoogleID = '587544336772-dk14bvn9bn77em75i74apm1qdp1vt4mr.apps.googleusercontent.com';
-    // const FacebookID = '144659823540577';
-    // const tsport = process.env.API_URL;
-    // console.log('env test : ',tsport);
-    // const port = 8000;
     let historynow = useHistory();
-
-    // console.log('Props : ', props);
-    // console.log('user sesion : ', usersession);
 
     useEffect( () => {
         const updateuser = async() => {
-            // await axios.get(`http://localhost:${port}/api/auth`);
             await axios.get(`${process.env.REACT_APP_API_URL}/auth`);
         }
         updateuser();
       } , [props] )
 
     const LogInState = async (history) => {
-        // await axios.post(`http://localhost:${port}/api/auth?username=${user.username}&&password=${user.password}`)
-        // await axios.post(`http://localhost:${port}/api/auth`, null, {params:user})
         await axios.post(`${process.env.REACT_APP_API_URL}/auth`, null, {params:user})
         .then( (response) => {
             console.log('POST : ',response.data);
@@ -73,8 +60,7 @@ const Login = (props) => {
       ));
 
       const responseFacebook = (response) => {
-        // console.log('Facebook : ',response);
-        // console.log('Pic Facebook : ',response.picture.data.url);  
+        console.log('facebook:',response);
         const { login } = props.actions;
         let data = {
           userid : response.id,
@@ -85,11 +71,6 @@ const Login = (props) => {
         }
         login(data, historynow);
       }
-
-      // const responseGoogle = (response) => {
-      //   console.log('Google : ',response);
-      // }
-
 
 
 
@@ -124,31 +105,18 @@ const Login = (props) => {
                               size = "small"
                               isMobile = {true}
                               fields = "name,email,picture"
-                              scope = "public_profile,user_friends"
+                              scope = "public_profile"
                               callback = {responseFacebook}
                               icon = "fa-facebook"
                               textButton = "Facebook"
                               
-                            />
-                           
-                            
-
-                            {/* <GoogleLogin
-                              clientId= {GoogleID}
-                              buttonText="LOGIN WITH GOOGLE"
-                              onSuccess={responseGoogle}
-                              onFailure={responseGoogle}
-                            /> */}
-                            
-                            
+                            />                          
                         </div>  
                 </div>
             </div>
         </div>
   );
 }
-
-// export default Login;
 
 const { object } = PropTypes;
 

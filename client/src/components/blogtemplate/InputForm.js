@@ -34,7 +34,6 @@ const InputForm = () => {
         <div className='body-post'>
             <Navbar />
             <div className='wrapper-post'>
-    
                 <div className='box-post'>
                     <p>ผู้โพสต์ : {session.user.username}</p>
                     <form onSubmit={addPost}>

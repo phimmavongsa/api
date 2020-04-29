@@ -1,7 +1,7 @@
 .sec-items {
     color: #000;
     font-size: 12px;
-    background-color: rgb(240, 240, 240);
+    /* background-color: rgb(240, 240, 240); */
     margin-bottom: 10px;
 }
 .sec-items img {
@@ -35,9 +35,10 @@
 .sec-img h2 {
     z-index: 1;
     position: absolute;
-    top:10%;
+    width: 80%;
+    top:15%;
     left:50%;
-    font-size: 12px;
+    font-size: 13px;
     background-color: #DDDDDD;
     border-radius: 20px;
     padding: 2px 10px;

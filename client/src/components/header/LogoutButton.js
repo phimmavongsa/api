@@ -6,7 +6,7 @@ import { logout } from '../actions/sessionActions';
 import './Header.css';
 
 const LogoutButton = ({ history, logout }) => (
-  <button  className='btn-logout' onClick={() => logout(history)} > LOGOUT </button>
+  <button  className='btn-logout' onClick={() => logout(history)} > ออกจากระบบ </button>
 );
 
 const { object, func } = PropTypes;

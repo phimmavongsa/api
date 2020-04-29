@@ -1,27 +1,13 @@
 import React from 'react';
 import './PostCard.css';
-// import { useSelector,useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-// import ViewPost from './ViewPost';
-// import axios from 'axios';
-
-
 
 const PostCard = props => {
     let history = useHistory(); 
 
     const viewpost = () => {
-        // console.log('view : ' , props); 
-
-        history.push({
-            pathname: '/view',
-            state: { ...props }
-          })
-          
-
+        history.push({ pathname: '/view', state: { ...props } })
     }
-
-
 
     return (
         <div className='sec-items'>

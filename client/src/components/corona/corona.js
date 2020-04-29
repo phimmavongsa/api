@@ -4,9 +4,7 @@ import Footer from '../footer/footer';
 import axios from 'axios';
 import './corona.css';
 
-
 const Corona = (props) => {
-
     const [WorldStat, setWorldStat] = useState({});
     const [CasesByCountry, setCasesByCountry] = useState([]);
 
@@ -28,6 +26,7 @@ const Corona = (props) => {
               console.log(error)
             })
         }
+        
         const Cases_Country = async () => {
             axios({
                 "method":"GET",
@@ -51,56 +50,26 @@ const Corona = (props) => {
         // eslint-disable-next-line
       }, [props])
 
-      const printCasesByCountry = () =>{
-          if(CasesByCountry && CasesByCountry.length ){
-            //   const {country_name,cases,new_cases,deaths,new_deaths,serious_critical,total_recovered,total_tests} = Cases;
-              return CasesByCountry
-              .filter( cases => cases.country_name !== '' )
-              .map( (cases,index) => {
-                //   if( index !== 0 && cases.country_name !== "Thailand"){
-                    return (
-                        <tr key={index} >
-                            <td>{cases.country_name}</td>
-                            <td>{cases.cases}</td>
-                            <td>{cases.new_cases}</td>
-                            <td>{cases.deaths}</td>
-                            <td>{cases.new_deaths}</td>
-                            <td>{cases.serious_critical}</td>
-                            <td>{cases.total_recovered}</td>
-                        </tr>
-                      )
-                //   } else if (cases.country_name === "Thailand" ){
-                //     return (
-                //         <tr key={index} style={{backgroundColor: "lightblue"}}  >
-                //             <td>{cases.country_name}</td>
-                //             <td>{cases.cases}</td>
-                //             <td>{cases.new_cases}</td>
-                //             <td>{cases.deaths}</td>
-                //             <td>{cases.new_deaths}</td>
-                //             <td>{cases.serious_critical}</td>
-                //             <td>{cases.total_recovered}</td>
-                //         </tr>
-                //     )
-                //   }
-                //   return (
-                //     <tr key={index} >
-                //         <td>{cases.country_name}</td>
-                //         <td>{cases.cases}</td>
-                //         <td>{cases.new_cases}</td>
-                //         <td>{cases.deaths}</td>
-                //         <td>{cases.new_deaths}</td>
-                //         <td>{cases.serious_critical}</td>
-                //         <td>{cases.total_recovered}</td>
-                //     </tr>
-                //   )
-              })
-          } 
-      }
+    const printCasesByCountry = () =>{
+        if(CasesByCountry && CasesByCountry.length ){
+            return CasesByCountry
+            .filter( cases => cases.country_name !== '' )
+            .map( (cases,index) => {
+                return (
+                    <tr key={index} >
+                        <td>{cases.country_name}</td>
+                        <td>{cases.cases}</td>
+                        <td>{cases.new_cases}</td>
+                        <td>{cases.deaths}</td>
+                        <td>{cases.new_deaths}</td>
+                        <td>{cases.serious_critical}</td>
+                        <td>{cases.total_recovered}</td>
+                    </tr>
+                    )
+            })
+        } 
+    }
 
-
-        // console.log('Cases:',Cases)
-        // const {total_cases,total_deaths,total_recovered,new_cases,new_deaths} = WorldStat;
-        // const {country_name,cases,new_cases,deaths,new_deaths,serious_critical,total_recovered,total_tests} = Cases;
     return (
         <div className='body-covid'>
             <Navbar />

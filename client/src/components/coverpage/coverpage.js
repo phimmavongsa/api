@@ -4,10 +4,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './coverpage.css';
 
-// const port = 8000;
-
 const Coverpage = (props) => {
-    const posts = useSelector(state => state.post);
     const session = useSelector(state => state.session);
     const [Cover, setCover] = useState({});
     const [Typing, setTyping] = useState('');
@@ -20,7 +17,6 @@ const Coverpage = (props) => {
         let selectedText = '';
         let text = '';
         const get_Coverpage = async () => {
-            // let result = await axios.get(`http://localhost:${port}/api/cover_pages`);
             await axios.get(`${process.env.REACT_APP_API_URL}/cover_pages`)
             .then( (response) => {
                 setCover(response.data);
@@ -28,7 +24,6 @@ const Coverpage = (props) => {
             .catch( (error) => {
                 console.log(error);
             });
-            // setCover(result.data);
         }
         const type = () => {
             if(count === typeString.length){
@@ -69,11 +64,6 @@ const Coverpage = (props) => {
 
     }
     printCover();
-    
-    if (!posts || !posts.length) {
-    return (<h2>Oop!,  Wait a minute for server query data</h2>);
-    };
-
 
     return (
         <section className="hero" id="hero">
@@ -89,7 +79,6 @@ const Coverpage = (props) => {
             <h1>Today, Have A Good Day</h1>
             <h3>Hello {session.authenticated? session.user.username:'Guest'}</h3>
             <p>Your are <span id="typing" className="typing">{Typing}</span></p>
-            {/* <a href="/" className="btn">Click Here</a>  */}
         </section>
 
     )

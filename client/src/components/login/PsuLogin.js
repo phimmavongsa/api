@@ -7,29 +7,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import './PsuLogin.css';
 
-
-// const port = 8000;
-
 const PsuLogin = (props) => {
     const user = useSelector( state => state.user );
-    // const usersession = useSelector( state => state.usersession );
     const dispatch = useDispatch();
-    // let historynow = useHistory();
-
-    // console.log('Props : ', props);
-    // console.log('user sesion : ', usersession);
-    // console.log('user  : ', user);
-
-    // useEffect( () => {
-    //     const updateuser = async() => {
-    //         await axios.get(`http://localhost:${port}/api/auth`);
-    //     }
-    //     updateuser();
-    //   } , [props] )
-
+ 
     const LogInState = async (history) => {
-        // await axios.post(`http://localhost:${port}/api/psu_auth?username=${user.username}&&password=${user.password}`)
-        // await axios.post(`http://localhost:${port}/api/psu_auth`, null, {params:user})
         await axios.post(`${process.env.REACT_APP_API_URL}/psu_auth`, null, {params:user})
         .then( (response) => {
             // console.log('POST : ',response.data);
@@ -42,30 +24,12 @@ const PsuLogin = (props) => {
                 login(response.data, history);
     
             }else{
-                // console.log('POST : ',response);
-                // historynow.push('/psuauth');
                 window.location.reload(true);
             }
           })
           .catch( (error) => {
             console.log(error);
           });
-
-
-
-        // if(result.data.authenticated){
-        //     dispatch( { 
-        //         type:'LOGIN', 
-        //         ...result.data
-        //     } )
-        //     const { login } = props.actions;
-        //     login(user, history);
-
-        // }else{
-        //     console.log(result.data)
-        //     historynow.push('/psuauth');
-        //     // window.location.reload(true);
-        // }
     }
 
     const SubmitButton = withRouter(({ history }) => (
@@ -76,14 +40,6 @@ const PsuLogin = (props) => {
             เข้าสู่ระบบ
         </button>
       ))
-
-    //   const SignButton = withRouter(({ history }) => (
-    //     <a href='/signup'>
-    //         <button className = 'btn-login'>สมัครสมาชิก</button>
-    //     </a>
-    //   ))
-    
-    
 
 
   return (
@@ -109,7 +65,6 @@ const PsuLogin = (props) => {
   );
 }
 
-// export default PsuLogin;
 
 const { object } = PropTypes;
 
