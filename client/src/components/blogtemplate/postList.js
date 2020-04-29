@@ -43,7 +43,7 @@ const PostList = props => {
       }, [props]);
 
     if (!posts || !posts.length) {
-        return (<h2>Oop!,  Wait a minute for server query data</h2>);
+        return (<h2>Oop!,  Wait a minute for server response</h2>);
     };
 
     return (

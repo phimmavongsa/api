@@ -3,9 +3,6 @@ import { withRouter,useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './Signup.css';
 
-
-// const port = 8000;
-
 const Signup = () => {
     const [Email, setEmail] = useState('');
     const [Username, setUsername] = useState('');
@@ -16,7 +13,6 @@ const Signup = () => {
     const SignupState = async () => {
         if( Email && Username && Password && rePassword ){
             if(Password === rePassword){
-                // await axios.post(`http://localhost:${port}/api/users?email=${Email}&&username=${Username}&&password=${Password}`);
                 await axios.post(`${process.env.REACT_APP_API_URL}/users`, null, 
                 {
                     params: { 
@@ -32,9 +28,6 @@ const Signup = () => {
                 .catch( (error) => {
                     console.log(error);
                   });
-
-                // alert('สมัครเสร็จเรียบร้อย  สามารถเข้าสู่ระบบได้แล้ว');
-                // history.push('/login');
 
             } else {
                 console.log('Password not match');
@@ -98,17 +91,3 @@ const Signup = () => {
 }
 
 export default Signup;
-
-// const { object } = PropTypes;
-
-// Login.propTypes = {
-//   actions: object.isRequired
-// };
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     actions: bindActionCreators(sessionActions, dispatch)
-//   };
-// };
-
-// export default connect(null, mapDispatch)(Signup);
