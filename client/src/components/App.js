@@ -12,6 +12,7 @@ import CoronaPage from './corona/corona';
 import InputPost from './blogtemplate/InputForm';
 import ViewPost from './blogtemplate/ViewPost';
 import Policy from './policy/privacy__policy';
+import About from './about/About';
 import './App.css';
 
 axios.defaults.withCredentials = true;
@@ -31,8 +32,9 @@ const App =  ({ authenticated, checked }) => {
           <PrivateRoute exact path="/view" component={ViewPost} authenticated={authenticated} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/psuauth" component={PsuLogin} /> 
-          <Route exact path="/policy" component={Policy} />    
+          <Route exact path="/psuauth" component={PsuLogin} />
+          <Route exact path="/policy" component={Policy} />
+          <Route exact path="/about" component={About} />
         </div>
       }
     </Router>

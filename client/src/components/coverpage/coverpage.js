@@ -7,7 +7,7 @@ import './coverpage.css';
 // const port = 8000;
 
 const Coverpage = (props) => {
-    
+    const posts = useSelector(state => state.post);
     const session = useSelector(state => state.session);
     const [Cover, setCover] = useState({});
     const [Typing, setTyping] = useState('');
@@ -56,24 +56,26 @@ const Coverpage = (props) => {
         pauseOnHover: true,
         arrows:false
 
-      };
+    };
 
-      const printCover = () => {
-          if(Cover && Cover.length){
-              return Cover.map( (each, index) => {
-                  return (
-                    list.push(each.img)
-                  )
-              })
-          }
+    const printCover = () => {
+        if(Cover && Cover.length){
+            return Cover.map( (each, index) => {
+                return (
+                list.push(each.img)
+                )
+            })
+        }
 
-      }
-      printCover();
+    }
+    printCover();
+    
+    if (!posts || !posts.length) {
+    return (<h2>Oop!,  Wait a minute for server query data</h2>);
+    };
 
 
     return (
-
-
         <section className="hero" id="hero">
             <div className="slide-container ">
                 <Zoom {...zoomInProperties}>

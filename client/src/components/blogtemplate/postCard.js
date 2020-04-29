@@ -11,7 +11,7 @@ const PostCard = props => {
     let history = useHistory(); 
 
     const viewpost = () => {
-        console.log('view : ' , props); 
+        // console.log('view : ' , props); 
 
         history.push({
             pathname: '/view',

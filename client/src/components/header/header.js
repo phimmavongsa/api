@@ -22,16 +22,12 @@ const Header = () => {
 
                 <nav>
                     <li><a href="/">Home</a></li>
-                    {/* <li><a href="#our-work">Work</a></li> */}
                     <li><a href="/covid">Covid-19</a></li>
-                    {/* <li><a href="/post">Post</a></li> */}
                     <li><a href="/policy">Policy</a></li>
-                    {/* <li><h3>{session.user.username}</h3></li>
-                    <li><LogOut /></li> */}
-
+                    <li><a href="/about">ติดต่อเรา</a></li>
                     {   session.authenticated && 
                         <div className="user-display">
-                            <li><a href="/post">Post</a></li>
+                            <li><a href="/post">สร้างโพสต์</a></li>
                             {session.user.picture? <img className="avatar" alt="avatar" src={session.user.picture}  />:<img className="avatar" alt="avatar" src="https://www.w3schools.com/w3images/avatar2.png"  />}
                             <p>{session.user.username}</p>
                             <LogOut />     

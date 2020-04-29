@@ -22,23 +22,21 @@ const PostList = props => {
             // const result = await axios.get(`http://localhost:${port}/api/posts`) 
             await axios.get(`${process.env.REACT_APP_API_URL}/posts`)
             .then( (response) => {
-                if(response.data.message){
-                    console.log('No data, Wait server query data');
-                }else{
-                    // console.log('data',result.data);
+                if(!response.data.message){
                     dispatch({ type: 'GET_POSTS', posts: response.data });
                 }
+
+                // if(response.data.message){
+                //     console.log('No data, Wait server query data');
+                // }else{
+                //     // console.log('data',result.data);
+                //     dispatch({ type: 'GET_POSTS', posts: response.data });
+                // }
             })
             .catch( (error) => {
                 console.log(error);
             });
 
-            // if(result.data.message){
-            //     console.log('No data, Wait server query data');
-            // }else{
-            //     // console.log('data',result.data);
-            //     dispatch({ type: 'GET_POSTS', posts: result.data }) 
-            // }
         }
         getPosts();
         // eslint-disable-next-line
