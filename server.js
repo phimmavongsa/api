@@ -14,9 +14,44 @@ const dbName = process.env.DATABASENAME_MONGDB;
 const client = new MongoClient(uri, { useNewUrlParser: true,useUnifiedTopology: true });
 let information = {};
 let callbackData = { authenticated:false };
+let urllist = [ 
+            'https://dde5fddd.ap.ngrok.io',
+            'https://eb78b340.ngrok.io',
+            'https://localhost:3000',
+            'https://production-dcw.web.app'
+          ];
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin',urllist[3] );
+  next();
+});
 
 app.use( cors({ 
-    origin: true, 
+    origin: [ 
+              'https://localhost:3000',
+              'https://20875701.ap.ngrok.io',
+              'https://production-dcw.web.app',
+              'https://production-dcw.web.app/auth',
+              'https://production-dcw.web.app/psuauth',
+              'https://production-dcw.web.app/users',
+              'https://production-dcw.web.app/posts',
+              'https://production-dcw.web.app/cover_pages',
+              'eb78b340.ngrok.io/',
+              'eb78b340.ngrok.io/login',
+              'eb78b340.ngrok.io/psuauth',
+              'dde5fddd.ap.ngrok.io/',
+              'dde5fddd.ap.ngrok.io/login',
+              'dde5fddd.ap.ngrok.io/psuauth',
+              'dde5fddd.ap.ngrok.io/face_auth',
+              '8813d87f.jp.ngrok.io/',
+              '8813d87f.jp.ngrok.io/api'/
+              '8813d87f.jp.ngrok.io/api/auth',
+              '8813d87f.jp.ngrok.io/api/psu_auth',
+              '8813d87f.jp.ngrok.io/api/face_auth',
+              '8813d87f.jp.ngrok.io/api/users',
+              '8813d87f.jp.ngrok.io/api/posts',
+              '8813d87f.jp.ngrok.io/api/cover_pages'
+            ], 
     methods: ['GET', 'POST','PUT','DELETE'], 
     credentials: true 
 }));
@@ -79,7 +114,7 @@ router.route('/auth')
                 callbackData.permission = information.users[i].permission;
                 callbackData.authenticated = true;
                 LoopCheck = false;
-                console.log(' User :', user.username, 'Authen Pass!!!');
+                console.log('User :', user.username, 'Authen Pass!!!');
             }else{
                 callbackData.userid = null;
                 callbackData.username = null;
@@ -88,7 +123,7 @@ router.route('/auth')
             }
         }    
     }
-    console.log(callbackData);
+    console.log('User :', callbackData);
     if(callbackData.authenticated) {
         console.log('login Success!!!');
         res.json( {
@@ -122,13 +157,15 @@ router.route('/psu_auth')
 
                     if(response.GetStudentDetailsResult.string[0] != '') {
                         console.log('PSU PASSPORT login Success!!!');
-                        res.json( {
-                                    authenticated : true,
-                                    userid : response.GetStudentDetailsResult.string[0],
-                                    username : response.GetStudentDetailsResult.string[1]+' '+response.GetStudentDetailsResult.string[2],
-                                    picture : false,
-                                    permission: 'user'
-                                });
+                        let psudata = {
+                                        authenticated : true,
+                                        userid : response.GetStudentDetailsResult.string[0],
+                                        username : response.GetStudentDetailsResult.string[1]+' '+response.GetStudentDetailsResult.string[2],
+                                        picture : false,
+                                        permission: 'user'
+                                    };
+                        console.log('User : ', psudata);
+                        res.json(psudata);
                     }else{
                         console.log('PSU PASSPORT login false!!!');
                         res.json({authenticated:false});
@@ -140,6 +177,21 @@ router.route('/psu_auth')
         // res.end();
     })
 
+router.route('/face_auth')
+    .post((req,res) => {
+      console.log('FaceBook respone: ',req.query);
+      let useruserFacebook = {};
+      useruserFacebook.userid = req.query.username;
+      useruserFacebook.username = req.query.password;
+      useruserFacebook.picture = req.query.password;
+      useruserFacebook.permission = req.query.permission;
+      if(useruserFacebook.userid){
+        res.json({authenticated:true});
+      }
+      else{
+        res.json({authenticated:false});
+      }
+    })
 
 router.route('/users')
     .get((req,res) => {

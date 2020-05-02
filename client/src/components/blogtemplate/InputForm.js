@@ -23,7 +23,7 @@ const InputForm = () => {
         })
         .then( (response) => {
             alert('โพสต์สำเร็จ');
-            // console.log(response.data);
+            console.log(response.data);
         })
         .catch( (error) => {
             console.log(error);

@@ -10,7 +10,7 @@ import './PsuLogin.css';
 const PsuLogin = (props) => {
     const user = useSelector( state => state.user );
     const dispatch = useDispatch();
- 
+    
     const LogInState = async (history) => {
         await axios.post(`${process.env.REACT_APP_API_URL}/psu_auth`, null, {params:user})
         .then( (response) => {
@@ -31,6 +31,9 @@ const PsuLogin = (props) => {
             console.log(error);
           });
     }
+
+
+    
 
     const SubmitButton = withRouter(({ history }) => (
         <button

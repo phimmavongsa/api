@@ -58,7 +58,7 @@ const Login = (props) => {
         </a>
       ));
 
-      const responseFacebook = (response) => {
+      const responseFacebook =  async (response) => {
         console.log('facebook:',response);
         const { login } = props.actions;
         let data = {
@@ -67,8 +67,23 @@ const Login = (props) => {
           picture : response.picture.data.url,
           permission :'facebook_user'
           
-        }
-        login(data, historynow);
+        };
+
+        await axios.post(`${process.env.REACT_APP_API_URL}/face_auth`, null, {params:data})
+        .then( (res) => {
+          console.log(res)
+          if(res.data.authenticated) {
+            login(data, historynow);
+          } else {
+            historynow.push('/');
+          }
+        })
+        .catch( (error) => {
+          console.log(error);
+        });
+
+
+        // login(data, historynow);
       }
 
 

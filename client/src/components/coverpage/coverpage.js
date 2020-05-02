@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './coverpage.css';
 
+
 const Coverpage = (props) => {
     const session = useSelector(state => state.session);
     const [Cover, setCover] = useState({});

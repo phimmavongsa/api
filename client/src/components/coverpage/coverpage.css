@@ -7,8 +7,8 @@
     text-align: center;
 }
 
-.hero .background-image {
-    background-image: url('./assets/img/tom-unsplash.jpg');
+/* .hero .background-image {
+    background-image: url('./tom-unsplash.jpg');
     position: absolute;
     top: 0;
     left: 0;
@@ -16,9 +16,9 @@
     height: 100%;
     background-size: cover;
     z-index: -1;
-}
+} */
 
-.hero .background-image:after {
+/* .hero .background-image:after {
     content: "";
     position: absolute;
     top: 0;
@@ -27,7 +27,7 @@
     height: 100%;
     background-color: #414a4f;
     opacity: 0.5;
-}
+} */
 
 
 .hero h1 {
